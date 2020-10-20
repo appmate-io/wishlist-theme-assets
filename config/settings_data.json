@@ -4,7 +4,6 @@
     "app_wk_login_required": false,
     "app_wk_icon": "heart",
     "app_wk_col_bg_shape": "square",
-    "app_wk_share_position": "top",
     "app_wk_products_per_row": "4"
   }
 }

@@ -40,26 +40,6 @@
       },
       {
         "type": "select",
-        "id": "app_wk_share_position",
-        "label": "Share Wishlist Position",
-        "options": [
-          {
-            "value": "top",
-            "label": "Top"
-          },
-          {
-            "value": "bottom",
-            "label": "Bottom"
-          },
-          {
-            "value": "hidden",
-            "label": "Hidden"
-          }
-        ],
-        "default": "top"
-      },
-      {
-        "type": "select",
         "id": "app_wk_products_per_row",
         "label": "Products per Row",
         "options": [

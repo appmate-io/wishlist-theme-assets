@@ -9,7 +9,11 @@
 
     {{ page.content }}
 
+    {%- unless page.handle contains 'share' -%}
     <!-- include 'wishlist-collection' -->
+    {%- else -%}
+    <!-- include 'wishlist-shared' -->
+    {%- endunless -%}
 
   </div>
 
