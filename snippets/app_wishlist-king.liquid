@@ -21,7 +21,7 @@
         locale: {
           wishlist_empty_note: "{{ 'app_wishlist-king.general.wishlist_empty_note' | t }}",
           add_to_wishlist: "{{ 'app_wishlist-king.general.add_to_wishlist' | t }}",
-          remove_from_wishlis: "{{ 'app_wishlist-king.general.remove_from_wishlis' | t }}",
+          remove_from_wishlist: "{{ 'app_wishlist-king.general.remove_from_wishlist' | t }}",
           clear_wishlist: "{{ 'app_wishlist-king.general.clear_wishlist' | t }}",
           in_wishlist: "{{ 'app_wishlist-king.general.in_wishlist' | t }}",
           share_wishlist: "{{ 'app_wishlist-king.general.share_wishlist' | t }}",
@@ -373,7 +373,7 @@
   {% endif %}
   <a href="{{ wishlist.url }}" class="wk-link wk-{{ wishlist.state }}"
      title="{{ locale.view_wishlist }}">
-    <div class="wk-icon icon">{% include link_icon %}</div>
+    <div class="wk-icon">{% include link_icon %}</div>
     <span class="wk-label">
       Wishlist
     </span>
@@ -400,7 +400,7 @@
 >
   {% if product.in_wishlist %}
     {% assign btn_text = locale.in_wishlist %}
-    {% assign btn_title = locale.remove_from_wishlis %}
+    {% assign btn_title = locale.remove_from_wishlist %}
     {% assign btn_action = 'wk-remove-product' %}
     {% assign btn_icon = 'wishlist-icon-filled' %}
   {% else %}
@@ -411,7 +411,7 @@
   {% endif %}
 
   <button type="button" class="wk-button-product {{ btn_action }}" title="{{ btn_title }}" data-{{ btn_action }}="{{ product.id }}">
-    <div class="wk-icon icon">{% include btn_icon %}</div>
+    <div class="wk-icon">{% include btn_icon %}</div>
     <span class="wk-label">{{ btn_text }}</span>
   </button>
 </script>
@@ -424,7 +424,7 @@
 >
   {% if product.in_wishlist %}
     {% assign btn_text = locale.in_wishlist %}
-    {% assign btn_title = locale.remove_from_wishlis %}
+    {% assign btn_title = locale.remove_from_wishlist %}
     {% assign btn_action = 'wk-remove-product' %}
     {% assign btn_icon = 'wishlist-icon-filled' %}
   {% else %}
@@ -452,24 +452,27 @@
     {% assign item_id = product.wishlist_item_id %}
   {% endif %}
 
+  {% assign add_class = '' %}
   {% if product.in_wishlist and wishlist.read_only == true %}
     {% assign btn_text = locale.in_wishlist %}
-    {% assign btn_title = locale.remove_from_wishlis %}
+    {% assign btn_title = locale.remove_from_wishlist %}
     {% assign btn_action = 'wk-remove-product' %}
     {% assign btn_icon = 'wishlist-icon-filled' %}
   {% elsif product.in_wishlist and wishlist.read_only == false %}
     {% assign btn_text = locale.in_wishlist %}
-    {% assign btn_title = locale.remove_from_wishlis %}
+    {% assign btn_title = locale.remove_from_wishlist %}
     {% assign btn_action = 'wk-remove-item' %}
     {% assign btn_icon = 'wishlist-icon-remove' %}
+    {% assign add_class = 'wk-with-hover' %}
   {% else %}
     {% assign btn_text = locale.add_to_wishlist %}
     {% assign btn_title = locale.add_to_wishlist %}
     {% assign btn_action = 'wk-add-product' %}
     {% assign btn_icon = 'wishlist-icon-empty' %}
+    {% assign add_class = 'wk-with-hover' %}
   {% endif %}
 
-  <button type="button" class="wk-button-wishlist-page {{ btn_action }}" title="{{ btn_title }}" data-{{ btn_action }}="{{ item_id }}">
+  <button type="button" class="wk-button-wishlist-page {{ btn_action }} {{ add_class }}" title="{{ btn_title }}" data-{{ btn_action }}="{{ item_id }}">
     <div class="wk-icon">
       {% include btn_icon %}
     </div>
