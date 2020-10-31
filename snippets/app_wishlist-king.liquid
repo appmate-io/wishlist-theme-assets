@@ -234,7 +234,7 @@
           container.find('.wk-price-preview').html(formatMoney(variant.price));
         }
       } else {
-        container.find('.wk-add-to-cart').addClass('disabled').attr('disabled', 'disabled').attr('value', message);
+        container.find('.wk-add-to-cart').addClass('disabled').attr('disabled', 'disabled').attr('value', Appmate.globals.locale.sold_out);
         container.find('.wk-price-preview').text(Appmate.globals.locale.sold_out);
       }
     };
