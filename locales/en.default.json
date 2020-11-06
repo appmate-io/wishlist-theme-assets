@@ -1,9 +1,9 @@
 {
-  "wishlist": {
+  "app_wishlist-king": {
     "general": {
-      "wishlist_empty_note": "Your wishlist is empty!",
+      "wishlist_empty_note": "Your wishlist is empty",
       "add_to_wishlist": "Add to Wishlist",
-      "remove_from_wishlist": "Remove from Wishlist",
+      "remove_from_wishlis": "Remove from Wishlist",
       "clear_wishlist": "Clear Wishlist",
       "in_wishlist": "In Wishlist",
       "share_wishlist": "Share Wishlist",

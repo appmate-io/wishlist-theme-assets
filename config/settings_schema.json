@@ -14,23 +14,6 @@
         "default": false
       },
       {
-        "type": "select",
-        "id": "app_wk_icon",
-        "label": "Wishlist Icon",
-        "info": "Choose between Heart or Star icon. For your own custom icon, please contact support@appmate.io",
-        "options": [
-          {
-            "value": "heart",
-            "label": "Heart"
-          },
-          {
-            "value": "star",
-            "label": "Star"
-          }
-        ],
-        "default": "heart"
-      },
-      {
         "type": "header",
         "content": "Button - Collection"
       },

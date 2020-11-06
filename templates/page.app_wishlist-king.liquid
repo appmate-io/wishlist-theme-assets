@@ -8,12 +8,7 @@
     <h1 id="wk-page-title">{{ page.title }}</h1>
 
     {{ page.content }}
-
-    {%- unless page.handle contains 'share' -%}
-    <!-- include 'wishlist-collection' -->
-    {%- else -%}
-    <!-- include 'wishlist-shared' -->
-    {%- endunless -%}
+    <!-- include 'wishlist-collection{%- if page.handle contains 'shared' -%}-shared{%- endif -%}' -->
 
   </div>
 

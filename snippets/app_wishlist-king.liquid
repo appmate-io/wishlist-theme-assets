@@ -161,7 +161,10 @@
             .then(function(product) {
               const select = Appmate.wk.$(elem).find(".wk-option-select")[0];
               product.options = product.options.map(function(option){return option.name});
-              product.variants.forEach(function(variant){variant.product_id = product.id});
+              product.variants.forEach(function(variant){
+                variant.product_id = product.id;
+                variant.price /= 100;
+              });
               appmateOptionSelect(select, product);
 
               Appmate.wk.$(elem).find(".wk-product-title a").html(product.title).css({opacity: 1});
