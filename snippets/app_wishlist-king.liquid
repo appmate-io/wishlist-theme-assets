@@ -19,6 +19,7 @@
           root_url: '{% unless request.locale.root_url == "/"  %}{{ request.locale.root_url }}{% endunless %}'
         },
         locale: {
+          wishlist: "{{ 'app_wishlist-king.general.wishlist' | t }}",
           wishlist_empty_note: "{{ 'app_wishlist-king.general.wishlist_empty_note' | t }}",
           add_to_wishlist: "{{ 'app_wishlist-king.general.add_to_wishlist' | t }}",
           remove_from_wishlist: "{{ 'app_wishlist-king.general.remove_from_wishlist' | t }}",
@@ -377,9 +378,7 @@
   <a href="{{ wishlist.url }}" class="wk-link wk-{{ wishlist.state }}"
      title="{{ locale.view_wishlist }}">
     <div class="wk-icon">{% include link_icon %}</div>
-    <span class="wk-label">
-      Wishlist
-    </span>
+    <span class="wk-label">{{ locale.wishlist }}</span>
     <span class="wk-count">({{ wishlist.item_count }})</span>
   </a>
 </script>
