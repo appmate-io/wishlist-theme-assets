@@ -5,12 +5,12 @@
 /* -- Wishlist button collection -- */
 $wk-button-collection-icon-color: currentColor;
 $wk-button-collection-backgrund-color: rgba(0, 0, 0, 0);
-$wk-button-collection-icon-size: 16px;
+$wk-button-collection-icon-size: 18px;
 
 /* -- Wishlist button product -- */
 $wk-button-product-icon-color: currentColor;
 $wk-button-product-text-color: currentColor;
-$wk-button-product-icon-size: 16px;
+$wk-button-product-icon-size: 18px;
 $wk-button-product-icon-padding: 0;
 
 /* -- Wishlist button wishlist page -- */
@@ -27,7 +27,7 @@ $wk-button-wishlist-clear-text-color-hover: #fff;
 /* -- Wishlist link (in header) -- */
 $wk-header-link-icon-color: currentColor;
 $wk-header-link-icon-color-hover: currentColor;
-$wk-header-link-icon-size: 15px;
+$wk-header-link-icon-size: 21px;
 $wk-header-link-icon-padding: 0;
 
 /* -- Wishlist page -- */
@@ -44,23 +44,9 @@ $link-sharing-color: #333;
 $copy-link-color: #fff;
 $copy-link-background: #999;
 
-/* -- Upsell Widget --*/
-$swiper-button-color: #999;
-
 /*/////////////////////////////////////////////////////////////////////////////*/
 /* !Mixins */
 /*////////////////////////////////////////////////////////////////////////////*/
-
-@mixin wk-hide-text {
-  text-indent: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-@mixin wk-clearfix {
-  clear: both;
-  overflow: hidden;
-}
 
 @mixin wk-icon($color: #000, $icon-size: 15px, $icon-padding: 5px) {
   .wk-icon {
@@ -71,13 +57,8 @@ $swiper-button-color: #999;
 
     svg {
       overflow: visible;
-      width: 100%;
-      height: 100%;
-
-      path {
-        fill: $color;
-        stroke: $color;
-      }
+      width: $icon-size;
+      height: $icon-size;
     }
   }
 }
@@ -174,6 +155,19 @@ button.wk-button-collection {
     display: inline-block;
     padding: 0;
     margin: 0 auto !important;
+    color: $wk-button-collection-icon-color;
+  }
+
+  svg {
+    fill: transparent;
+    stroke: currentColor;
+    stroke-width: 1px;
+  }
+
+  &.wk-remove-product {
+    svg {
+      fill: currentColor;
+    }
   }
 
   .wk-label {
@@ -189,7 +183,7 @@ button.wk-button-collection {
 }
 
 * > button.wk-button-collection.wk-add-product {
-  opacity: 0;
+  // opacity: 0;
 }
 
 *:hover > button.wk-button-collection {
@@ -205,7 +199,7 @@ button.wk-button-product {
   );
 
   display: block;
-  margin: 18px 0 0 0 !important;
+  margin: 0px 0px 0px 0px;
   padding: 0;
   border: none;
   border-radius: 0;
@@ -213,11 +207,25 @@ button.wk-button-product {
   .wk-icon {
     display: inline-block;
 
-    margin: 0 5px 0 0;
+    margin: 0 3px 0 0;
     padding: 0;
 
     position: relative;
-    top: 2px;
+    top: 4px;
+
+    color: $wk-button-product-icon-color;
+  }
+
+  svg {
+    fill: transparent;
+    stroke: currentColor;
+    stroke-width: 1px;
+  }
+
+  &.wk-remove-product {
+    svg {
+      fill: currentColor;
+    }
   }
 
   .wk-label {
@@ -242,9 +250,6 @@ button.wk-button-wishlist-page {
   );
   display: inline-block;
 
-  &.wk-with-hover {
-    opacity: 0;
-  }
 
   &.wk-remove-item,
   &.wk-add-product {
@@ -334,19 +339,34 @@ a.wk-link {
     transition: 0.3s all;
   }
 
-  &:hover {
-    .wk-icon svg path {
-      fill: $wk-header-link-icon-color-hover;
-      stroke: $wk-header-link-icon-color-hover;
-    }
-  }
-
   .wk-icon {
+    position: relative;
+    top: 3px;
     width: $wk-header-link-icon-size;
     height: $wk-header-link-icon-size;
 
     margin: 0 5px 0 0;
     padding: 0;
+
+    color: $wk-header-link-icon-color;
+  }
+
+  &:hover {
+    .wk-icon {
+      color: $wk-header-link-icon-color-hover;
+    }
+  }
+
+  svg {
+    fill: transparent;
+    stroke: currentColor;
+    stroke-width: 1px;
+  }
+
+  &.wk-filled {
+    svg {
+      fill: currentColor;
+    }
   }
 
   .wk-label {
@@ -795,33 +815,6 @@ ul#wk-share-list {
 }
 
 /*/////////////////////////////////////////////////////////////////////////////*/
-/* !Upsell Widget */
-/*////////////////////////////////////////////////////////////////////////////*/
-.swiper-button-prev,
-.swiper-container-rtl .swiper-button-next {
-  left: -24px;
-  background: none;
-
-  svg {
-    width: 48px;
-    height: 48px;
-    fill: $swiper-button-color;
-  }
-}
-
-.swiper-button-next,
-.swiper-container-rtl .swiper-button-prev {
-  right: -24px;
-  background: none;
-
-  svg {
-    width: 48px;
-    height: 48px;
-    fill: $swiper-button-color;
-  }
-}
-
-/*/////////////////////////////////////////////////////////////////////////////*/
 /* !Responsive Styles */
 /*////////////////////////////////////////////////////////////////////////////*/
 @media (max-width: 1024px) {
@@ -830,10 +823,4 @@ ul#wk-share-list {
       display: inline-block !important;
     }
   }
-}
-
-@media (max-width: 767px) {
-}
-
-@media (max-width: 320px) {
 }
