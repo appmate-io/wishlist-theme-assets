@@ -13,7 +13,7 @@
       "share_by_email_body": "Here is the link to my list:",
       "share_list_title": "My Wishlist",
       "share_list_description": "Check out some of my favorite things @ {{ shopName }}.",
-      "login_or_signup_note_html": "To permanently save your wishlist please <a href='{{ login_url }}'>login<\/a> or <a href='{{ register_url }}'>sign up<\/a>.",
+      "login_or_signup_note_html": "To save your wishlist please <a href='{{ login_url }}'>login<\/a> or <a href='{{ register_url }}'>sign up<\/a>.",
       "add_to_cart": "Add to Cart",
       "sold_out": "Sold Out",
       "view_product": "View product",

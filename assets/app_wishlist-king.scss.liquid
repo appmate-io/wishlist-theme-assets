@@ -199,7 +199,7 @@ button.wk-button-product {
   );
 
   display: block;
-  margin: 0px 0px 0px 0px;
+  margin: 20px 0px 0px 0px;
   padding: 0;
   border: none;
   border-radius: 0;
@@ -211,7 +211,7 @@ button.wk-button-product {
     padding: 0;
 
     position: relative;
-    top: 4px;
+    top: -1px;
 
     color: $wk-button-product-icon-color;
   }
@@ -341,7 +341,8 @@ a.wk-link {
 
   .wk-icon {
     position: relative;
-    top: 3px;
+    top: 0px;
+
     width: $wk-header-link-icon-size;
     height: $wk-header-link-icon-size;
 
@@ -375,6 +376,15 @@ a.wk-link {
 
   .wk-count {
     // display: none;
+    margin-left: 3px;
+
+    &::before {
+      content: "(";
+    }
+
+    &::after {
+      content: ")";
+    }
   }
 
   &.wk-empty {
