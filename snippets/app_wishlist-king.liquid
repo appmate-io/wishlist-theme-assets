@@ -92,10 +92,12 @@
         var item = this.getAttribute('data-wk-move-to-cart');
         var formData = $form.serialize();
 
-        Appmate.wk.trackEvent("Added to Cart", {
-          product: product,
-          variant: product.selected_or_first_available_variant || {},
-        });
+        Appmate.wk.getItem(item).then(function(product){
+          Appmate.wk.trackEvent("Added to Cart", {
+            product: product,
+            variant: product.selected_or_first_available_variant || {},
+          });
+        })
 
         fadeOrNot(this, function(){
           Appmate.wk
