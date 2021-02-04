@@ -92,20 +92,18 @@
         var item = this.getAttribute('data-wk-move-to-cart');
         var formData = $form.serialize();
 
+        Appmate.wk.trackEvent("Added to Cart", {
+          product: product,
+          variant: product.selected_or_first_available_variant || {},
+        });
+
         fadeOrNot(this, function(){
           Appmate.wk
           .moveToCart(item, formData)
           .then(function(product){
             $elem.prop("disabled", false);
-
-            Appmate.wk.trackEvent("Added to Cart", {
-              product: product,
-              variant: product.selected_or_first_available_variant || {},
-              callback: function () {
-                window.scrollTo(0, 0);
-                location.reload();
-              },
-            });
+            window.scrollTo(0, 0);
+            location.reload();
           });
         });
       }),
