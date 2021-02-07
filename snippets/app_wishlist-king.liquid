@@ -5,7 +5,7 @@
         domain: '{{ shop.domain }}',
         permanent_domain: '{{ shop.permanent_domain }}',
         currency: '{{ shop.currency }}',
-        name: '{{ shop.name | replace: '&amp;', '&' }}'
+        name: '{{ shop.name | replace: '&amp;', '&' }}',
       },
       session: {
         customer: '{{ customer.id }}',
@@ -16,7 +16,7 @@
           app_wk_icon: '{{ settings.app_wk_icon }}',
           app_wk_products_per_row: {{ settings.app_wk_products_per_row }},
           money_format: '{{ shop.money_format }}',
-          root_url: '{% unless request.locale.root_url == "/"  %}{{ request.locale.root_url }}{% endunless %}'
+          root_url: '{% unless request.locale.root_url == "/"  %}{{ request.locale.root_url }}{% endunless %}',
         },
         locale: {
           wishlist: "{{ 'app_wishlist-king.general.wishlist' | t }}",
@@ -40,7 +40,7 @@
           share_with_whatsapp: "{{ 'app_wishlist-king.general.share_with_whatsapp' | t }}",
           share_by_email: "{{ 'app_wishlist-king.general.share_by_email' | t }}",
           get_link: "{{ 'app_wishlist-king.general.get_link' | t }}",
-          send_to_customer_service: "{{ 'app_wishlist-king.general.send_to_customer_service' | t }}"
+          send_to_customer_service: "{{ 'app_wishlist-king.general.send_to_customer_service' | t }}",
         },
         customer: '{{ customer.id }}',
         customer_accounts_enabled: {{ shop.customer_accounts_enabled }},
@@ -51,7 +51,6 @@
         },
         loginRequired: {{ settings.app_wk_login_required }},
         handle: "{{ pages["wishlist"].url }}",
-        proxyHandle: "/a/wk",
         share: {
           handle: "{{ pages["shared-wishlist"].url }}",
           title: "{{ 'app_wishlist-king.general.share_list_title' | t }}",
@@ -60,7 +59,14 @@
           hashTags: 'wishlist',
           twitterUser: false
         }
-      }
+      },
+      tracking: {
+        drip: false,
+        facebook: false,
+        google: false,
+        klaviyo: false,
+        simonData: false
+      },
     };
 
     Appmate.wk.on({
