@@ -107,13 +107,13 @@
 
         fadeOrNot(this, function(){
           Appmate.wk
-          .moveToCart(item, formData)
+          .addToCart(formData)
           .then(function(product){
             $elem.prop("disabled", false);
             window.scrollTo(0, 0);
             location.reload();
           });
-        });
+        }, true);
       }),
       'click [data-wk-share]': eventHandler(function(){
         var params = {
