@@ -216,11 +216,9 @@
       var itemId = Appmate.wk.$(selector.variantIdField).parents('[data-wk-item]').attr('data-wk-item');
       var container = Appmate.wk.$('#wk-item-' + itemId);
 
-      {% if page.template_suffix == 'wishlist' %}
-      if (variant) {
+      if (variant && !window.location.pathname.includes("shared")) {
         Appmate.wk.updateItem(itemId, {selected_variant_id: variant.id});
       }
-      {% endif %}
 
       var imageUrl = '';
 
