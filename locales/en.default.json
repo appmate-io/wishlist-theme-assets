@@ -16,6 +16,7 @@
       "login_or_signup_note_html": "To save your wishlist please <a href='{{ login_url }}'>login<\/a> or <a href='{{ register_url }}'>sign up<\/a>.",
       "add_to_cart": "Add to Cart",
       "sold_out": "Sold Out",
+      "quantity": "Quantity",
       "view_product": "View product",
       "view_wishlist": "View Wishlist",
       "share_on_facebook": "Share on Facebook",
