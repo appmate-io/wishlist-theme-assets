@@ -2,10 +2,12 @@
 
 <style>
   :root {
-    --wk-link--color: black;
-    --wk-link__icon--size: 18px;
+    --wk-icon--stroke-width: 1px;
 
-    --wk-button--color: black;
+    --wk-link--color: currentColor;
+    --wk-link__icon--size: 22px;
+
+    --wk-button--color: currentColor;
     --wk-button__icon--size: 18px;
 
     --wk-product-form__submit--background: SlateGray;
@@ -16,21 +18,10 @@
     --wk-share-button--size: 26px;
 
     --wk-page__image--aspect-ratio: 1 / 1;
-    --wk-page__grid--max-columns: 3;
+    --wk-page__grid--max-columns: 4;
   }
 
-  .wk-header__list-item {
-    margin: 0;
-  }
-
-  .wk-icon__svg {
-    stroke-width: 1.5px;
-  }
-
-  .wk-link {
-    top: 2px;
-    padding: 15px 7px;
-  }
+  .wk-link {}
 
   .wk-link__label {
     display: none;
@@ -39,6 +30,8 @@
   .wk-link__count {
     display: none;
   }
+
+  .wk-button {}
 </style>
 
 <script type="module">
@@ -137,28 +130,10 @@
     },
   });
 
-  // Header link desktop
+  // Header link
   WishlistKing.watch(
     {
-      selector: "#AccessibleNav .site-nav__item:last-of-type",
-    },
-    (target) => {
-      target.insertBefore(
-        WishlistKing.createElement(
-          "li",
-          {
-            className: "wk-header__list-item",
-          },
-          WishlistKing.createComponent("wishlist-link")
-        )
-      );
-    }
-  );
-
-  // Header link mobile
-  WishlistKing.watch(
-    {
-      selector: ".site-nav--mobile .cart-link",
+      selector: "<add-header-cart-selector>",
     },
     (target) => {
       target.insertBefore(WishlistKing.createComponent("wishlist-link"));
@@ -168,8 +143,8 @@
   // Wishlist button on product page
   WishlistKing.watch(
     {
-      template: "product",
       selector: "form[action='{{ routes.cart_add_url }}']",
+      template: "product",
     },
     (target) => {
       target.append(
@@ -184,6 +159,7 @@
   WishlistKing.watch(
     {
       selector: "[data-product-id]",
+      template: "collection",
     },
     (target) => {
       target.append(
@@ -197,9 +173,9 @@
   // Wishlist page
   WishlistKing.watch(
     {
+      selector: "<add-page-content-selector>",
       template: "page",
       handle: WishlistKing.toolkit.config.wishlist.handle,
-      selector: ".main-content .wrapper",
     },
     (target) => {
       target.append(WishlistKing.createComponent("wishlist-page"));
@@ -211,7 +187,7 @@
     {
       template: "page",
       handle: WishlistKing.toolkit.config.wishlist.share.handle,
-      selector: ".main-content .wrapper",
+      selector: "<add-page-content-selector>",
     },
     (target) => {
       target.append(WishlistKing.createComponent("wishlist-page-shared"));
