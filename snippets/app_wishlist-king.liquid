@@ -131,7 +131,7 @@
   });
 
   // Header link
-  WishlistKing.watch(
+  WishlistKing.observe(
     {
       selector: "header a[href='{{ routes.cart_url }}']",
     },
@@ -141,7 +141,7 @@
   );
 
   // Wishlist button on product page
-  WishlistKing.watch(
+  WishlistKing.observe(
     {
       selector: "form[action='{{ routes.cart_add_url }}']",
       template: "product",
@@ -156,7 +156,7 @@
   );
 
   // Wishlist button on collection page
-  WishlistKing.watch(
+  WishlistKing.observe(
     {
       selector: "[data-product-id]",
       template: "collection",
@@ -171,7 +171,7 @@
   );
 
   // Wishlist page
-  WishlistKing.watch(
+  WishlistKing.observe(
     {
       selector: "main .rte",
       template: "page",
@@ -183,7 +183,7 @@
   );
 
   // Shared wishlist page
-  WishlistKing.watch(
+  WishlistKing.observe(
     {
       selector: "main .rte",
       template: "page",
