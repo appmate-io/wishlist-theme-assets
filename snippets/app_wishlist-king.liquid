@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ 'app_wishlist-king_sdk.css' | asset_url }}" />
+<link rel="stylesheet" href="{{ 'app_wishlist-king_templates.css' | asset_url }}" />
 
 <style>
   :root {
@@ -133,7 +133,7 @@
   // Header link
   WishlistKing.watch(
     {
-      selector: "<add-header-cart-selector>",
+      selector: "header a[href='{{ routes.cart_url }}']",
     },
     (target) => {
       target.insertBefore(WishlistKing.createComponent("wishlist-link"));
@@ -173,24 +173,24 @@
   // Wishlist page
   WishlistKing.watch(
     {
-      selector: "<add-page-content-selector>",
+      selector: "main .rte",
       template: "page",
       handle: WishlistKing.toolkit.config.wishlist.handle,
     },
     (target) => {
-      target.append(WishlistKing.createComponent("wishlist-page"));
+      target.insertAfter(WishlistKing.createComponent("wishlist-page"));
     }
   );
 
   // Shared wishlist page
   WishlistKing.watch(
     {
+      selector: "main .rte",
       template: "page",
       handle: WishlistKing.toolkit.config.wishlist.share.handle,
-      selector: "<add-page-content-selector>",
     },
     (target) => {
-      target.append(WishlistKing.createComponent("wishlist-page-shared"));
+      target.insertAfter(WishlistKing.createComponent("wishlist-page-shared"));
     }
   );
 </script>
