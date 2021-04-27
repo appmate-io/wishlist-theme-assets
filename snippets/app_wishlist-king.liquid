@@ -80,12 +80,12 @@
     wishlist: {
       loginRequired: "{{ settings.app_wk_login_required }}" === "true",
       moveToCart: false, // Remove from wishlist when adding to cart
-      handle: "wishlist-new",
+      handle: "wishlist",
       filter: function (product) {
         return !product.hidden;
       },
       share: {
-        handle: "shared-wishlist-new",
+        handle: "shared-wishlist",
         title: "{{ 'app_wishlist-king.general.share_list_title' | t }}",
         description:
           "{{ 'app_wishlist-king.general.share_list_description' | t: shopName: shop.name }}",
