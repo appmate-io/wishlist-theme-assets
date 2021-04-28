@@ -1,6 +1,22 @@
 <link rel="stylesheet" href="{{ 'app_wishlist-king_templates.css' | asset_url }}" />
 
 <style>
+  .wk-link {}
+
+  .wk-link__icon {
+    margin-right: 0;
+  }
+
+  .wk-link__label {
+    display: none;
+  }
+
+  .wk-link__count {
+    display: none;
+  }
+
+  .wk-button {}
+
   :root {
     --wk-icon--stroke-width: 1px;
 
@@ -20,22 +36,6 @@
     --wk-page__image--aspect-ratio: 1 / 1;
     --wk-page__grid--max-columns: 4;
   }
-
-  .wk-link {}
-
-  .wk-link__icon {
-    margin-right: 0;
-  }
-
-  .wk-link__label {
-    display: none;
-  }
-
-  .wk-link__count {
-    display: none;
-  }
-
-  .wk-button {}
 </style>
 
 <script type="module">

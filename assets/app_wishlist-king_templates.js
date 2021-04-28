@@ -11,19 +11,6 @@ const templates = [
     `,
   },
   {
-    id: "wishlist-link-li",
-    data: "wishlist",
-    template: `
-      <li class="wk-header__list-item">
-        <a href="{{ wishlist.url }}" class="wk-link wk-link--{{ wishlist.state }}" title="{{ locale.view_wishlist }}">
-          <div class="wk-icon wk-link__icon">{% include 'wishlist-icon' %}</div>
-          <span class="wk-link__label">{{ locale.wishlist }}</span>
-          <span class="wk-link__count">{{ wishlist.item_count }}</span>
-        </a>
-      </li>
-    `,
-  },
-  {
     id: "wishlist-button",
     data: "product",
     events: {
