@@ -15,6 +15,9 @@ const templates = [
     data: "product",
     events: {
       "click button[data-wk-add-product]": (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
         const select = document.querySelector("form select[name='id']");
         WishlistKing.toolkit.addProduct(
           event.currentTarget.getAttribute("data-wk-add-product"),
@@ -22,11 +25,17 @@ const templates = [
         );
       },
       "click button[data-wk-remove-product]": (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
         WishlistKing.toolkit.removeProduct(
           event.currentTarget.getAttribute("data-wk-remove-product")
         );
       },
       "click button[data-wk-remove-item]": (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
         WishlistKing.toolkit.removeItem(
           event.currentTarget.getAttribute("data-wk-remove-item")
         );
