@@ -32,13 +32,14 @@
     --wk-link__icon--size: 20px;
 
     --wk-button--color: currentColor;
+    --wk-button__icon--color: currentColor;
     --wk-button__icon--size: 16px;
 
-    --wk-product-form__submit--background: currentColor;
-    --wk-product-form__submit--color: white;
+    --wk-product-form__submit--background: white;
+    --wk-product-form__submit--color: currentColor;
 
     --wk-share-button--color: white;
-    --wk-share-button--background: currentColor;
+    --wk-share-button--background: #3d3d3d;
     --wk-share-button--size: 26px;
 
     --wk-page__image--aspect-ratio: 1 / 1;
@@ -64,7 +65,7 @@
         window.scrollTo(0, 0);
         location.reload();
       },
-      loginRequired() {
+      loginRequired(intent) {
         window.location = [
           "/account/login?wk-redirect=",
           encodeURIComponent(
