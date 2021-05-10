@@ -4,7 +4,7 @@ const templates = [
     data: "wishlist",
     template: `
       <a href="{{ wishlist.url }}" class="wk-link wk-link--{{ wishlist.state }}" title="{{ locale.view_wishlist }}">
-        <div class="wk-icon wk-link__icon">{% include 'wishlist-icon' %}</div>
+        <div class="wk-icon wk-link__icon">{% include "wishlist-icon" %}</div>
         <span class="wk-link__label">{{ locale.wishlist }}</span>
         <span class="wk-link__count">{{ wishlist.item_count }}</span>
       </a>
@@ -61,7 +61,7 @@ const templates = [
       {% endif %}
 
       <button type="button" class="wk-button wk-button--{{ btn_action }} {{ addClass }}" title="{{ btn_title }}" data-wk-{{ btn_action }}-{{ scope }}="{{ targetId }}">
-        <div class="wk-icon wk-button__icon">{% include 'wishlist-icon' %}</div>
+        <div class="wk-icon wk-button__icon">{% include "wishlist-icon" %}</div>
         <span class="wk-button__label">{{ btn_text }}</span>
       </button>
     `,
@@ -70,7 +70,7 @@ const templates = [
     id: "wishlist-button-floating",
     data: "product",
     template: `
-	  {% include "wishlist-button" addClass: "wk-button--floating" %}
+	    {% include "wishlist-button" addClass: "wk-button--floating" %}
     `,
   },
   {
@@ -122,9 +122,9 @@ const templates = [
 
 			        <div class="wk-grid__item {% if onsale %}wk-product--sale{% endif %}" data-wk-item="{{ product.wishlist_item_id }}">
                 {% unless wishlist.read_only %}
-                  {% include 'wishlist-button-floating' itemId: product.wishlist_item_id %}
+                  {% include "wishlist-button-floating" itemId: product.wishlist_item_id %}
                 {% else %}
-				          {% include 'wishlist-button-floating' product: producut %}
+				          {% include "wishlist-button-floating" product: producut %}
                 {% endunless %}
 
                 <a href="{{ product | variant_url }}" class="wk-product-image" title="{{ locale.view_product }}" style="background-image: url({{ product | variant_img_url: '1000x' }})"></a>
@@ -139,7 +139,7 @@ const templates = [
                   </div>
 				        </div>
 
-                {% include 'wishlist-product-form' %}
+                {% include "wishlist-product-form" %}
               </div>
             {% endunless %}
           {% endfor %}
@@ -147,7 +147,7 @@ const templates = [
 
         {% comment %}
           {% unless wishlist.read_only %}
-            {% include 'wishlist-button-clear' %}
+            {% include "wishlist-button-clear" %}
           {% endunless %}
         {% endcomment %}
 
@@ -155,12 +155,12 @@ const templates = [
           <div class="wk-sharing">
             <h4 class="wk-title">{{ locale.share_wishlist }}</h4>
             <ul class="wk-sharing__list">
-              <li class="wk-sharing__list-item">{% include 'wishlist-share-button-fb' %}</li>
-              <li class="wk-sharing__list-item">{% include 'wishlist-share-button-twitter' %}</li>
-              <li class="wk-sharing__list-item">{% include 'wishlist-share-button-email' %}</li>
-              <li class="wk-sharing__list-item">{% include 'wishlist-share-button-link' %}</li>
-              <li class="wk-sharing__list-item">{% include 'wishlist-share-button-whatsapp' %}</li>
-              <li class="wk-sharing__list-item">{% include 'wishlist-share-button-contact' %}</li>
+              <li class="wk-sharing__list-item">{% include "wishlist-share-button-fb" %}</li>
+              <li class="wk-sharing__list-item">{% include "wishlist-share-button-twitter" %}</li>
+              <li class="wk-sharing__list-item">{% include "wishlist-share-button-email" %}</li>
+              <li class="wk-sharing__list-item">{% include "wishlist-share-button-link" %}</li>
+              <li class="wk-sharing__list-item">{% include "wishlist-share-button-whatsapp" %}</li>
+              <li class="wk-sharing__list-item">{% include "wishlist-share-button-contact" %}</li>
             </ul>
             <div class="wk-sharing__link wk-sharing__link--hidden"><span class="wk-sharing__link-text"></span><button class="wk-sharing__link__copy-button" data-clipboard-target=".wk-sharing__link-text">{{ locale.copy_share_link }}</button></div>
           </div>
@@ -228,7 +228,7 @@ const templates = [
     data: "shared_wishlist",
     template: `
       {% assign wishlist = shared_wishlist %}
-      {% include 'wishlist-collection' with wishlist %}
+      {% include "wishlist-page" with wishlist %}
     `,
   },
   {
