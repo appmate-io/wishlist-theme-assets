@@ -160,7 +160,7 @@ const templates = [
               <li class="wk-sharing__list-item">{% include "wishlist-share-button-email" %}</li>
               <li class="wk-sharing__list-item">{% include "wishlist-share-button-link" %}</li>
               <li class="wk-sharing__list-item">{% include "wishlist-share-button-whatsapp" %}</li>
-              <li class="wk-sharing__list-item">{% include "wishlist-share-button-contact" %}</li>
+              {% comment %}<li class="wk-sharing__list-item">{% include "wishlist-share-button-contact" %}</li>{% endcomment %}
             </ul>
             <div class="wk-sharing__link wk-sharing__link--hidden"><span class="wk-sharing__link-text"></span><button class="wk-sharing__link__copy-button" data-clipboard-target=".wk-sharing__link-text">{{ locale.copy_share_link }}</button></div>
           </div>
