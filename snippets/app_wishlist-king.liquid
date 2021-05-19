@@ -82,7 +82,7 @@
       domain: "{{ shop.domain }}",
       permanent_domain: "{{ shop.permanent_domain }}",
       currency: "{{ shop.currency }}",
-      money_format: "{{ shop.money_format }}",
+      money_format: {{ shop.money_format | json }},
       root_url:
         "{% unless routes.root_url == '/'  %}{{ routes.root_url }}{% endunless %}",
     },
