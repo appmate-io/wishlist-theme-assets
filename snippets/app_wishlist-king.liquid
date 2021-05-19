@@ -21,7 +21,7 @@
 
   .wk-button__label {}
 
-  .wk-button--floating {}
+  .wk-button.wk-button--floating {}
 
   .wk-product-form__submit {}
 
@@ -43,7 +43,7 @@
     --wk-share-button--size: 26px;
 
     --wk-page__image--aspect-ratio: 1 / 1;
-    --wk-page__grid--max-columns: 4;
+    --wk-page__grid--max-columns: {{ settings.appWishlistKing.features.maxProductsPerRow | default: 4 }};
   }
 </style>
 
@@ -78,68 +78,65 @@
       },
     },
     shop: {
-      name: "{{ shop.name | replace: '&amp;', '&' }}",
+      name: {{ shop.name | replace: "&amp;", "&" | json }},
       domain: "{{ shop.domain }}",
       permanent_domain: "{{ shop.permanent_domain }}",
       currency: "{{ shop.currency }}",
       money_format: {{ shop.money_format | json }},
-      root_url:
-        "{% unless routes.root_url == '/'  %}{{ routes.root_url }}{% endunless %}",
+      root_url: "{% unless routes.root_url == '/'  %}{{ routes.root_url }}{% endunless %}",
     },
     session: {
-      customer: "{{ customer.id }}",
-      customer_email: "{{ customer.email }}",
+      customer: {{ customer.id | json }},
+      customer_email: {{ customer.email | json }},
     },
     wishlist: {
-      loginRequired: "{{ settings.app_wk_login_required }}" === "true",
-      moveToCart: false, // Remove from wishlist when adding to cart
-      handle: "wishlist",
+      loginRequired: {{ settings.appWishlistKing.features.loginRequired | default: false }},
+      moveToCart: {{ settings.appWishlistKing.features.moveToCart | default: false }},
+      handle: {{ settings.appWishlistKing.setup.wishlistPageHandle | default: "wishlist" | json }},
       filter: function (product) {
         return !product.hidden;
       },
       share: {
-        handle: "shared-wishlist",
-        title: "{{ 'app_wishlist-king.general.share_list_title' | t }}",
-        description:
-          "{{ 'app_wishlist-king.general.share_list_description' | t: shopName: shop.name }}",
+        handle: {{ settings.appWishlistKing.setup.sharedWishlistPageHandle | default: "shared-wishlist" | json }},
+        title: {{ "app_wishlist-king.general.share_list_title" | t | json }},
+        description: {{ "app_wishlist-king.general.share_list_description" | t: shopName: shop.name | json }},
       },
     },
     tracking: {
-      drip: false,
-      facebook: false,
-      google: false,
-      klaviyo: false,
-      simonData: false,
+      drip: {{ settings.appWishlistKing.integrations.drip | default: false  }},
+      facebook: {{ settings.appWishlistKing.integrations.facebook | default: false }},
+      google: {{ settings.appWishlistKing.integrations.google | default: false }},
+      klaviyo: {{ settings.appWishlistKing.integrations.klaviyo | default: false }},
+      simonData: {{ settings.appWishlistKing.integrations.simonData | default: false }},
     },
     theme: {
-      settings: {},
       locale: {
-        wishlist: "{{ 'app_wishlist-king.general.wishlist' | t }}",
-        wishlist_empty_note: "{{ 'app_wishlist-king.general.wishlist_empty_note' | t }}",
-        add_to_wishlist: "{{ 'app_wishlist-king.general.add_to_wishlist' | t }}",
-        remove_from_wishlist: "{{ 'app_wishlist-king.general.remove_from_wishlist' | t }}",
-        clear_wishlist: "{{ 'app_wishlist-king.general.clear_wishlist' | t }}",
-        in_wishlist: "{{ 'app_wishlist-king.general.in_wishlist' | t }}",
-        share_wishlist: "{{ 'app_wishlist-king.general.share_wishlist' | t }}",
-        copy_share_link: "{{ 'app_wishlist-king.general.copy_share_link' | t }}",
-        share_link_copied: "{{ 'app_wishlist-king.general.share_link_copied' | t }}",
-        share_by_email_body: "{{ 'app_wishlist-king.general.share_by_email_body' | t }}",
-        login_or_signup_note: "{{ 'app_wishlist-king.general.login_or_signup_note_html' | t: login_url: routes.account_login_url, register_url: routes.account_register_url }}",
-        add_to_cart: "{{ 'app_wishlist-king.general.add_to_cart' | t }}",
-        sold_out: "{{ 'app_wishlist-king.general.sold_out' | t }}",
-        quantity: "{{ 'app_wishlist-king.general.quantity' | t }}",
-        view_product: "{{ 'app_wishlist-king.general.view_product' | t }}",
-        view_wishlist: "{{ 'app_wishlist-king.general.view_wishlist' | t }}",
-        share_on_facebook: "{{ 'app_wishlist-king.general.share_on_facebook' | t }}",
-        share_on_twitter: "{{ 'app_wishlist-king.general.share_on_twitter' | t }}",
-        share_on_pinterest: "{{ 'app_wishlist-king.general.share_on_pinterest' | t }}",
-        share_with_whatsapp: "{{ 'app_wishlist-king.general.share_with_whatsapp' | t }}",
-        share_by_email: "{{ 'app_wishlist-king.general.share_by_email' | t }}",
-        get_link: "{{ 'app_wishlist-king.general.get_link' | t }}",
-        send_to_customer_service: "{{ 'app_wishlist-king.general.send_to_customer_service' | t }}",
+        wishlist: {{ "app_wishlist-king.general.wishlist" | t | json }},
+        wishlist_empty_note: {{ "app_wishlist-king.general.wishlist_empty_note" | t | json }},
+        add_to_wishlist: {{ "app_wishlist-king.general.add_to_wishlist" | t | json }},
+        remove_from_wishlist: {{ "app_wishlist-king.general.remove_from_wishlist" | t | json }},
+        clear_wishlist: {{ "app_wishlist-king.general.clear_wishlist" | t | json }},
+        in_wishlist: {{ "app_wishlist-king.general.in_wishlist" | t | json }},
+        share_wishlist: {{ "app_wishlist-king.general.share_wishlist" | t | json }},
+        copy_share_link: {{ "app_wishlist-king.general.copy_share_link" | t | json }},
+        share_link_copied: {{ "app_wishlist-king.general.share_link_copied" | t | json }},
+        share_by_email_body: {{ "app_wishlist-king.general.share_by_email_body" | t | json }},
+        login_or_signup_note: {{ "app_wishlist-king.general.login_or_signup_note_html" | t: login_url: routes.account_login_url, register_url: routes.account_register_url | json }},
+        add_to_cart: {{ "app_wishlist-king.general.add_to_cart" | t | json }},
+        sold_out: {{ "app_wishlist-king.general.sold_out" | t | json }},
+        quantity: {{ "app_wishlist-king.general.quantity" | t | json }},
+        view_product: {{ "app_wishlist-king.general.view_product" | t | json }},
+        view_wishlist: {{ "app_wishlist-king.general.view_wishlist" | t | json }},
+        share_on_facebook: {{ "app_wishlist-king.general.share_on_facebook" | t | json }},
+        share_on_twitter: {{ "app_wishlist-king.general.share_on_twitter" | t | json }},
+        share_on_pinterest: {{ "app_wishlist-king.general.share_on_pinterest" | t | json }},
+        share_with_whatsapp: {{ "app_wishlist-king.general.share_with_whatsapp" | t | json }},
+        share_by_email: {{ "app_wishlist-king.general.share_by_email" | t | json }},
+        get_link: {{ "app_wishlist-king.general.get_link" | t | json }},
+        send_to_customer_service: {{ "app_wishlist-king.general.send_to_customer_service" | t | json }},
       },
-      customer: "{{ customer.id }}",
-      customer_accounts_enabled: "{{ shop.customer_accounts_enabled }}" === "true",
+      customer: {{ customer.id | json }},
+      customer_accounts_enabled: {{ shop.customer_accounts_enabled | json }},
     },
   });
 

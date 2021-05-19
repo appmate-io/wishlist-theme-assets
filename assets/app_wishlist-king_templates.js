@@ -100,7 +100,7 @@ const templates = [
 
       {% else %}
 
-        {% if customer_accounts_enabled and customer == false and wishlist.read_only == false %}
+        {% if customer_accounts_enabled and customer == null and wishlist.read_only == false %}
           <div class="wk-note wk-note__login">
             <p>{{ locale.login_or_signup_note }}</p>
           </div>
