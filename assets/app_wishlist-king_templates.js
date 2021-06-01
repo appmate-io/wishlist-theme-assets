@@ -194,6 +194,7 @@ const templates = [
       <form class="wk-product-form" action="/cart/add" method="post">
         {% assign current_variant = product.selected_or_first_available_variant %}
         <div class="wk-product-form__options">
+          <input name="id" value="{{ current_variant.id }}" type="hidden">
           {% unless product.has_only_default_variant %}
             {% for option in product.options_with_values %}
               <div class="wk-product-form__option">
