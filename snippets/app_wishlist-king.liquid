@@ -74,7 +74,7 @@
               intent: intent,
             })
           ),
-        ].join();
+        ].join("");
       },
     },
     shop: {
@@ -101,6 +101,7 @@
         title: {{ "app_wishlist-king.general.share_list_title" | t | json }},
         description: {{ "app_wishlist-king.general.share_list_description" | t: shopName: shop.name | json }},
       },
+      fallbackImage: "https://cdn.shopify.com/s/images/themes/product-1.png",
     },
     tracking: {
       drip: {{ settings.appWishlistKing.integrations.drip | default: false  }},

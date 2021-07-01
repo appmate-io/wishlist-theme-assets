@@ -118,7 +118,11 @@ const templates = [
               {% endif %}
 
               {% assign variant = product.selected_or_first_available_variant %}
-			        {% assign onsale = variant.compare_at_price >= variant.price %}
+			        {% if variant.price < variant.compare_at_price %}
+                {% assign onsale = true %}
+              {% else %}
+                {% assign onsale = false %}
+              {% endif %}
 
 			        <div class="wk-grid__item {% if onsale %}wk-product--sale{% endif %}" data-wk-item="{{ product.wishlist_item_id }}">
                 {% unless wishlist.read_only %}
