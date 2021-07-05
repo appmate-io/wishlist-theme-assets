@@ -60,7 +60,7 @@
       ready() {
         // App is ready and WishlistKing.toolkit can be used
       },
-      addedToCart(product) {
+      addedToCart(cart) {
         // This is a good place to trigger AJAX cart update
         window.scrollTo(0, 0);
         location.reload();
@@ -135,6 +135,7 @@
         share_by_email: {{ "app_wishlist-king.general.share_by_email" | t | json }},
         get_link: {{ "app_wishlist-king.general.get_link" | t | json }},
         send_to_customer_service: {{ "app_wishlist-king.general.send_to_customer_service" | t | json }},
+        add_all_to_cart: {{ "app_wishlist-king.general.add_all_to_cart" | t | json }},
       },
       customer: {{ customer.id | json }},
       customer_accounts_enabled: {{ shop.customer_accounts_enabled | json }},

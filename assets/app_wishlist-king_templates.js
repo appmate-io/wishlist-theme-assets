@@ -70,7 +70,7 @@ const templates = [
     id: "wishlist-button-floating",
     data: "product",
     template: `
-	    {% include "wishlist-button" addClass: "wk-button--floating" %}
+      {% include "wishlist-button" addClass: "wk-button--floating" %}
     `,
   },
   {
@@ -106,7 +106,7 @@ const templates = [
           </div>
         {% endif %}
 
-		    <div class="wk-grid">
+        <div class="wk-grid">
           {% assign item_count = 0 %}
           {% assign products = wishlist.products | reverse %}
           {% for product in products %}
@@ -118,30 +118,30 @@ const templates = [
               {% endif %}
 
               {% assign variant = product.selected_or_first_available_variant %}
-			        {% if variant.price < variant.compare_at_price %}
+              {% if variant.price < variant.compare_at_price %}
                 {% assign onsale = true %}
               {% else %}
                 {% assign onsale = false %}
               {% endif %}
 
-			        <div class="wk-grid__item {% if onsale %}wk-product--sale{% endif %}" data-wk-item="{{ product.wishlist_item_id }}">
+              <div class="wk-grid__item {% if onsale %}wk-product--sale{% endif %}" data-wk-item="{{ product.wishlist_item_id }}">
                 {% unless wishlist.read_only %}
                   {% include "wishlist-button-floating" itemId: product.wishlist_item_id %}
                 {% else %}
-				          {% include "wishlist-button-floating" product: producut %}
+                  {% include "wishlist-button-floating" product: producut %}
                 {% endunless %}
 
                 <a href="{{ product | variant_url }}" class="wk-product-image" title="{{ locale.view_product }}" style="background-image: url({{ product | variant_img_url: '1000x' }})"></a>
 
-				        <div class="wk-product-info">
+                <div class="wk-product-info">
                   <a class="wk-product-title" href="{{ product | variant_url }}">
-				            {{ product.title }}
+                    {{ product.title }}
                   </a>
-				          <div class="wk-product-price">
+                  <div class="wk-product-price">
                     <span class="wk-product-price--current">{{ variant.price | money }}</span>
                     <span class="wk-product-price--compare">{{ variant.compare_at_price | money }}</span>
                   </div>
-				        </div>
+                </div>
 
                 {% include "wishlist-product-form" %}
               </div>
@@ -150,12 +150,16 @@ const templates = [
         </div>
 
         {% comment %}
-          {% unless wishlist.read_only %}
-            {% include "wishlist-button-clear" %}
-          {% endunless %}
+        {% unless wishlist.read_only %}
+          {% include "wishlist-button-clear" %}
+        {% endunless %}
         {% endcomment %}
 
-		    {% unless wishlist.read_only %}
+        {% comment %}
+        {% include "wishlist-button-bulk-add-to-cart" %}
+        {% endcomment %}
+
+        {% unless wishlist.read_only %}
           <div class="wk-sharing">
             <h4 class="wk-title">{{ locale.share_wishlist }}</h4>
             <ul class="wk-sharing__list">
@@ -237,6 +241,25 @@ const templates = [
     `,
   },
   {
+    id: "wishlist-button-bulk-add-to-cart",
+    data: "wishlist",
+    events: {
+      "click button[data-wk-bulk-add-to-cart]": (event) => {
+        WishlistKing.toolkit.requestAddAllToCart(
+          event.currentTarget.getAttribute("data-wk-bulk-add-to-cart")
+        );
+      },
+    },
+    template: `
+      {% assign btn_text = locale.add_all_to_cart %}
+      {% assign btn_title = locale.add_all_to_cart %}
+
+      <button type="button" class="wk-button-bulk-add-to-cart" title="{{ btn_title }}" data-wk-bulk-add-to-cart="{{ wishlist.permaId }}">
+        <span class="wk-label">{{ btn_text }}</span>
+      </button>
+    `,
+  },
+  {
     id: "wishlist-button-clear",
     data: "wishlist",
     events: {
@@ -280,7 +303,7 @@ const templates = [
     template: `
       <a href="#" class="wk-share-button" title="{{ locale.share_on_twitter }}" data-wk-share-service="twitter" data-wk-share="{{ wishlist.permaId }}">
         <svg version="1.1" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 24 24">
-	      <path fill="currentColor" d="M23.444,4.834c-0.814,0.363-1.5,0.375-2.228,0.016c0.938-0.562,0.981-0.957,1.32-2.019c-0.878,0.521-1.851,0.9-2.886,1.104 C18.823,3.053,17.642,2.5,16.335,2.5c-2.51,0-4.544,2.036-4.544,4.544c0,0.356,0.04,0.703,0.117,1.036 C8.132,7.891,4.783,6.082,2.542,3.332C2.151,4.003,1.927,4.784,1.927,5.617c0,1.577,0.803,2.967,2.021,3.782 C3.203,9.375,2.503,9.171,1.891,8.831C1.89,8.85,1.89,8.868,1.89,8.888c0,2.202,1.566,4.038,3.646,4.456 c-0.666,0.181-1.368,0.209-2.053,0.079c0.579,1.804,2.257,3.118,4.245,3.155C5.783,18.102,3.372,18.737,1,18.459 C3.012,19.748,5.399,20.5,7.966,20.5c8.358,0,12.928-6.924,12.928-12.929c0-0.198-0.003-0.393-0.012-0.588 C21.769,6.343,22.835,5.746,23.444,4.834z"/>
+        <path fill="currentColor" d="M23.444,4.834c-0.814,0.363-1.5,0.375-2.228,0.016c0.938-0.562,0.981-0.957,1.32-2.019c-0.878,0.521-1.851,0.9-2.886,1.104 C18.823,3.053,17.642,2.5,16.335,2.5c-2.51,0-4.544,2.036-4.544,4.544c0,0.356,0.04,0.703,0.117,1.036 C8.132,7.891,4.783,6.082,2.542,3.332C2.151,4.003,1.927,4.784,1.927,5.617c0,1.577,0.803,2.967,2.021,3.782 C3.203,9.375,2.503,9.171,1.891,8.831C1.89,8.85,1.89,8.868,1.89,8.888c0,2.202,1.566,4.038,3.646,4.456 c-0.666,0.181-1.368,0.209-2.053,0.079c0.579,1.804,2.257,3.118,4.245,3.155C5.783,18.102,3.372,18.737,1,18.459 C3.012,19.748,5.399,20.5,7.966,20.5c8.358,0,12.928-6.924,12.928-12.929c0-0.198-0.003-0.393-0.012-0.588 C21.769,6.343,22.835,5.746,23.444,4.834z"/>
         </svg>
       </a>
     `,
@@ -332,7 +355,7 @@ const templates = [
     template: `
       <a href="#" class="wk-share-button" title="{{ locale.send_to_customer_service }}" data-wk-share-service="contact" data-wk-share="{{ wishlist.permaId }}">
         <svg width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-	      <path fill="currentColor" d="M19 2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h4l3 3 3-3h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-6 16h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 11.9 13 12.5 13 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+        <path fill="currentColor" d="M19 2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h4l3 3 3-3h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-6 16h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 11.9 13 12.5 13 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
         </svg>
       </a>
     `,

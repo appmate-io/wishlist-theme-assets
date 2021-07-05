@@ -25,7 +25,8 @@
       "share_with_whatsapp": "Share with WhatsApp",
       "share_by_email": "Share with Email",
       "get_link": "Get link",
-      "send_to_customer_service": "Send to customer service"
+      "send_to_customer_service": "Send to customer service",
+      "add_all_to_cart": "Add wishlist to cart"
     }
   }
 }
