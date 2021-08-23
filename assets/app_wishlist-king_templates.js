@@ -54,14 +54,16 @@ const templates = [
 
       {% assign scope = "product" %}
       {% assign targetId = product.id %}
+      {% assign icon_name = "wishlist-icon" %}
 
       {% if itemId %}
       {% assign scope = "item" %}
       {% assign targetId = itemId %}
+      {% assign icon_name = "remove-icon" %}
       {% endif %}
 
       <button type="button" class="wk-button wk-button--{{ btn_action }} {{ addClass }}" title="{{ btn_title }}" data-wk-{{ btn_action }}-{{ scope }}="{{ targetId }}">
-        <div class="wk-icon wk-button__icon">{% include "wishlist-icon" %}</div>
+        <div class="wk-icon wk-button__icon">{% include icon_name %}</div>
         <span class="wk-button__label">{{ btn_text }}</span>
       </button>
     `,
@@ -281,8 +283,17 @@ const templates = [
   {
     id: "wishlist-icon",
     template: `
-      <svg class="wk-icon__svg" width="100%" height="100%" viewBox="0 0 16 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <path d="M8.01163699,13.9053769 C7.72930024,13.7740736 7.41492611,13.6176996 7.07646224,13.4366167 C6.06926649,12.897753 5.06198912,12.2561336 4.12636931,11.5170512 C1.52930452,9.4655288 0.00308384,7.09476443 -1.62955422e-07,4.44184117 C-0.002450934,1.99198843 1.92175104,0.01242822 4.28303025,0.01000225 C5.41066623,0.00972036 6.49184369,0.4629765 7.28270844,1.2678673 L7.99827421,1.9961237 L8.71152148,1.26559643 C9.4995294,0.45849728 10.5791258,0.0023831 11.7071151,1.23718384e-08 L11.7060299,1.23718384e-08 C14.0693815,-0.002425017 15.9967334,1.97018759 16.000011,4.421337 C16.0038592,7.07662382 14.4809572,9.4530151 11.8850542,11.5121483 C10.9520963,12.2521931 9.9477036,12.8951276 8.94340074,13.4354976 C8.60619585,13.6169323 8.29297309,13.7736855 8.01163699,13.9053769 Z"></path>
+      <svg class="wk-icon__svg" width="100%" height="100%" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <path vector-effect="non-scaling-stroke" d="M32.012,59.616c-1.119-.521-2.365-1.141-3.707-1.859a79.264,79.264,0,0,1-11.694-7.614C6.316,42,.266,32.6.254,22.076,0.244,12.358,7.871,4.506,17.232,4.5a16.661,16.661,0,0,1,11.891,4.99l2.837,2.889,2.827-2.9a16.639,16.639,0,0,1,11.874-5.02h0c9.368-.01,17.008,7.815,17.021,17.539,0.015,10.533-6.022,19.96-16.312,28.128a79.314,79.314,0,0,1-11.661,7.63C34.369,58.472,33.127,59.094,32.012,59.616Z"/>
+      </svg>
+    `,
+  },
+  {
+    id: "remove-icon",
+    template: `
+      <svg class="wk-icon__svg" width="100%" height="100%" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <path vector-effect="non-scaling-stroke" d="M0.309,0.309a0.9,0.9,0,0,1,1.268,0L63.691,62.423a0.9,0.9,0,0,1-1.268,1.268L0.309,1.577A0.9,0.9,0,0,1,.309.309Z"/>
+        <path vector-effect="non-scaling-stroke" d="M63.691,0.309a0.9,0.9,0,0,1,0,1.268L1.577,63.691A0.9,0.9,0,0,1,.309,62.423L62.423,0.309A0.9,0.9,0,0,1,63.691.309Z"/>
       </svg>
     `,
   },
