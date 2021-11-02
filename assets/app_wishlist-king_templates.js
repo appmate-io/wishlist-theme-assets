@@ -130,7 +130,7 @@ const templates = [
                 {% unless wishlist.read_only %}
                   {% include "wishlist-button-floating" itemId: product.wishlist_item_id %}
                 {% else %}
-                  {% include "wishlist-button-floating" product: producut %}
+                  {% include "wishlist-button-floating" product: product %}
                 {% endunless %}
 
                 <a href="{{ product | variant_url }}" class="wk-product-image" title="{{ locale.view_product }}" style="background-image: url({{ product | variant_img_url: '1000x' }})"></a>
