@@ -1,6 +1,3 @@
-{%- assign theme_id = theme.id | json -%}
-{%- if shop.metafields.wishlist_king_theme[theme_id] -%}
-
 <link rel="stylesheet" href="{{ 'app_wishlist-king_templates.css' | asset_url }}" />
 
 <style>
@@ -53,13 +50,11 @@
 <script type="module">
   import WishlistKing from "{{ 'app_wishlist-king_sdk.js' | asset_url }}";
   import templates from "{{ 'app_wishlist-king_templates.js' | asset_url }}";
-
-  // Uncomment this line to use WishlistKing in third party scripts
-  // window.WishlistKing = WishlistKing;
+  import settings from "{{ 'app_wishlist-king_settings.js' | asset_url }}";
 
   WishlistKing.toolkit.init({
     templates,
-    settings: {{ shop.metafields.wishlist_king_theme[theme_id] }},
+    settings,
     events: {
       ready() {
         // App is ready and WishlistKing.toolkit can be used
@@ -193,10 +188,8 @@
       target.insertAfter(WishlistKing.createComponent("wishlist-page"));
     }
   );
-  */
 
   // Shared wishlist page
-  /*
   WishlistKing.observe(
     {
       selector: "main .rte",
@@ -209,5 +202,3 @@
   );
   */
 </script>
-
-{%- endif -%}
