@@ -93,7 +93,7 @@ const templates = [
       },
     },
     template: `
-      <div class='wk-page'>
+      <div class='wk-page {% if wishlist.read_only %}wk-page--shared{% endif %}'>
       {% if wishlist.item_count == 0 %}
 
           <div class="wk-note wk-note__list-empty">
