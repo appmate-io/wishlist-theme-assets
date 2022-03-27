@@ -108,57 +108,59 @@ const templates = [
           </div>
         {% endif %}
 
-        <div class="wk-grid">
-          {% assign item_count = 0 %}
-          {% assign products = wishlist.products | reverse %}
-          {% for product in products %}
-            {% assign item_count = item_count | plus: 1 %}
-            {% unless limit and item_count > limit %}
-              {% assign hide_default_title = false %}
-              {% if product.variants.length == 1 and product.variants[0].title contains 'Default' %}
-                {% assign hide_default_title = true %}
-              {% endif %}
+        <div>
+          <div class="wk-grid">
+            {% assign item_count = 0 %}
+            {% assign products = wishlist.products | reverse %}
+            {% for product in products %}
+              {% assign item_count = item_count | plus: 1 %}
+              {% unless limit and item_count > limit %}
+                {% assign hide_default_title = false %}
+                {% if product.variants.length == 1 and product.variants[0].title contains 'Default' %}
+                  {% assign hide_default_title = true %}
+                {% endif %}
 
-              {% assign variant = product.selected_or_first_available_variant %}
-              {% if variant.price < variant.compare_at_price %}
-                {% assign onsale = true %}
-              {% else %}
-                {% assign onsale = false %}
-              {% endif %}
-
-              <div class="wk-grid__item {% if onsale %}wk-product--sale{% endif %}" data-wk-item="{{ product.wishlist_item_id }}">
-                {% unless wishlist.read_only %}
-                  {% include "wishlist-button-floating" itemId: product.wishlist_item_id %}
+                {% assign variant = product.selected_or_first_available_variant %}
+                {% if variant.price < variant.compare_at_price %}
+                  {% assign onsale = true %}
                 {% else %}
-                  {% include "wishlist-button-floating" product: product %}
-                {% endunless %}
+                  {% assign onsale = false %}
+                {% endif %}
 
-                <a href="{{ product | variant_url }}" class="wk-product-image" title="{{ locale.view_product }}" style="background-image: url({{ product | variant_img_url: '1000x' }})"></a>
+                <div class="wk-grid__item {% if onsale %}wk-product--sale{% endif %}" data-wk-item="{{ product.wishlist_item_id }}">
+                  {% unless wishlist.read_only %}
+                    {% include "wishlist-button-floating" itemId: product.wishlist_item_id %}
+                  {% else %}
+                    {% include "wishlist-button-floating" product: product %}
+                  {% endunless %}
 
-                <div class="wk-product-info">
-                  <a class="wk-product-title" href="{{ product | variant_url }}">
-                    {{ product.title }}
-                  </a>
-                  <div class="wk-product-price">
-                    <span class="wk-product-price--current">{{ variant.price | money }}</span>
-                    <span class="wk-product-price--compare">{{ variant.compare_at_price | money }}</span>
+                  <a href="{{ product | variant_url }}" class="wk-product-image" title="{{ locale.view_product }}" style="background-image: url({{ product | variant_img_url: '1000x' }})"></a>
+
+                  <div class="wk-product-info">
+                    <a class="wk-product-title" href="{{ product | variant_url }}">
+                      {{ product.title }}
+                    </a>
+                    <div class="wk-product-price">
+                      <span class="wk-product-price--current">{{ variant.price | money }}</span>
+                      <span class="wk-product-price--compare">{{ variant.compare_at_price | money }}</span>
+                    </div>
                   </div>
-                </div>
 
-                {% include "wishlist-product-form" %}
-              </div>
-            {% endunless %}
-          {% endfor %}
+                  {% include "wishlist-product-form" %}
+                </div>
+              {% endunless %}
+            {% endfor %}
+          </div>
         </div>
+
+        {% comment %}
+        {% include "wishlist-button-bulk-add-to-cart" %}
+        {% endcomment %}
 
         {% comment %}
         {% unless wishlist.read_only %}
           {% include "wishlist-button-clear" %}
         {% endunless %}
-        {% endcomment %}
-
-        {% comment %}
-        {% include "wishlist-button-bulk-add-to-cart" %}
         {% endcomment %}
 
         {% unless wishlist.read_only %}
