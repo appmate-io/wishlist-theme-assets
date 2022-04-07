@@ -126,27 +126,28 @@ const templates = [
                 {% else %}
                   {% assign onsale = false %}
                 {% endif %}
+                <div>
+                  <div class="wk-grid__item {% if onsale %}wk-product--sale{% endif %}" data-wk-item="{{ product.wishlist_item_id }}">
+                    {% unless wishlist.read_only %}
+                      {% include "wishlist-button-floating" itemId: product.wishlist_item_id %}
+                    {% else %}
+                      {% include "wishlist-button-floating" product: product %}
+                    {% endunless %}
 
-                <div class="wk-grid__item {% if onsale %}wk-product--sale{% endif %}" data-wk-item="{{ product.wishlist_item_id }}">
-                  {% unless wishlist.read_only %}
-                    {% include "wishlist-button-floating" itemId: product.wishlist_item_id %}
-                  {% else %}
-                    {% include "wishlist-button-floating" product: product %}
-                  {% endunless %}
+                    <a href="{{ product | variant_url }}" class="wk-product-image" title="{{ locale.view_product }}" style="background-image: url({{ product | variant_img_url: '1000x' }})"></a>
 
-                  <a href="{{ product | variant_url }}" class="wk-product-image" title="{{ locale.view_product }}" style="background-image: url({{ product | variant_img_url: '1000x' }})"></a>
-
-                  <div class="wk-product-info">
-                    <a class="wk-product-title" href="{{ product | variant_url }}">
-                      {{ product.title }}
-                    </a>
-                    <div class="wk-product-price">
-                      <span class="wk-product-price--current">{{ variant.price | money }}</span>
-                      <span class="wk-product-price--compare">{{ variant.compare_at_price | money }}</span>
+                    <div class="wk-product-info">
+                      <a class="wk-product-title" href="{{ product | variant_url }}">
+                        {{ product.title }}
+                      </a>
+                      <div class="wk-product-price">
+                        <span class="wk-product-price--current">{{ variant.price | money }}</span>
+                        <span class="wk-product-price--compare">{{ variant.compare_at_price | money }}</span>
+                      </div>
                     </div>
-                  </div>
 
-                  {% include "wishlist-product-form" %}
+                    {% include "wishlist-product-form" %}
+                  </div>
                 </div>
               {% endunless %}
             {% endfor %}
