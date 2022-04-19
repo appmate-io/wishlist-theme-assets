@@ -18,10 +18,10 @@ const templates = [
         event.preventDefault();
         event.stopPropagation();
 
-        const select = document.querySelector("form select[name='id']");
+        const variantId = document.querySelector("form *[name='id']")?.value;
         WishlistKing.toolkit.addProduct(
           event.currentTarget.getAttribute("data-wk-add-product"),
-          select ? select.value : undefined
+          variantId
         );
       },
       "click button[data-wk-remove-product]": (event) => {
