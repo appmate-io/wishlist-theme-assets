@@ -3,6 +3,7 @@ export default {
   "loginRequired": false,
   "sharedWishlistPageHandle": "shared-wishlist",
   "wishlistPageHandle": "wishlist",
+  "appmateAnalytics": true,
   "klaviyo": false,
   "facebookPixel": false,
   "googleAnalytics": false
