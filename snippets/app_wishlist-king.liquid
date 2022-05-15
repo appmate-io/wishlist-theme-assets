@@ -181,8 +181,7 @@
   WishlistKing.observe(
     {
       selector: "main .rte",
-      template: "page",
-      handle: WishlistKing.toolkit.settings.wishlistPageHandle,
+      template: "wishlist",
     },
     (target) => {
       target.insertAfter(WishlistKing.createComponent("wishlist-page"));
@@ -193,8 +192,7 @@
   WishlistKing.observe(
     {
       selector: "main .rte",
-      template: "page",
-      handle: WishlistKing.toolkit.settings.sharedWishlistPageHandle,
+      template: "shared-wishlist",
     },
     (target) => {
       target.insertAfter(WishlistKing.createComponent("wishlist-page-shared"));
