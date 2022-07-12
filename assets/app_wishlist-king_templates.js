@@ -18,7 +18,9 @@ const templates = [
         event.preventDefault();
         event.stopPropagation();
 
-        const variantId = document.querySelector("form *[name='id']")?.value;
+        const variantInput = document.querySelector("form *[name='id']");
+        const variantId = variantInput ? variantInput.value : undefined;
+
         WishlistKing.toolkit.addProduct(
           event.currentTarget.getAttribute("data-wk-add-product"),
           variantId
