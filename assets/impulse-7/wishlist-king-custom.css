@@ -1,0 +1,23 @@
+wishlist-link {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+wishlist-link wk-button {
+  --min-height: auto;
+  display: inline-flex;
+}
+
+wishlist-link .wk-button {
+  display: inline-flex;
+  width: 52px;
+  height: 43px;
+}
+
+wishlist-product-card {
+  --image-aspect-ratio: 1 / 1.5;
+}
+
+wk-select .wk-single-option {
+  display: flex;
+}

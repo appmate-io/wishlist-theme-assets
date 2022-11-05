@@ -1,32 +1,39 @@
 {
   "app_wishlist-king": {
-    "general": {
-      "wishlist": "Wishlist",
-      "wishlist_empty_note": "Your wishlist is empty",
-      "add_to_wishlist": "Add to Wishlist",
-      "remove_from_wishlist": "Remove from Wishlist",
-      "clear_wishlist": "Clear Wishlist",
-      "in_wishlist": "In Wishlist",
-      "share_wishlist": "Share Wishlist",
-      "copy_share_link": "Copy Link",
-      "share_link_copied": "Link Copied",
-      "share_by_email_body": "Here is the link to my list:",
-      "share_list_title": "My Wishlist",
-      "share_list_description": "Check out some of my favorite things from {{ shopName }}.",
-      "login_or_signup_note_html": "To save your wishlist please <a href='{{ login_url }}'>login</a> or <a href='{{ register_url }}'>sign up</a>.",
+    "wishlist_buttons": {
+      "add_product": "Add to Wishlist",
+      "product_added": "In Wishlist",
+      "remove_product": "Remove from Wishlist",
+      "view_wishlist": "View wishlist",
+      "clear_wishlist": "Clear wishlist",
+      "add_wishlist_to_cart": "Add wishlist to cart",
+      "save_for_later": "Save for later"
+    },
+    "wishlist_page": {
+      "title": "Wishlist",
+      "login_callout_html": "To save your wishlist please <a href='{{ login_url }}'>login</a> or <a href='{{ register_url }}'>sign up</a>.",
+      "wishlist_empty_callout_html": "Your wishlist is empty",
+      "product_removed_html": "Product no longer available",
+      "view_product": "View product"
+    },
+    "wishlist_product": {
       "add_to_cart": "Add to Cart",
-      "sold_out": "Sold Out",
-      "quantity": "Quantity",
+      "add_to_cart_sold_out": "Sold Out",
+      "select_variant": "Select variant",
       "view_product": "View product",
-      "view_wishlist": "View Wishlist",
-      "share_on_facebook": "Share on Facebook",
-      "share_on_twitter": "Share on Twitter",
-      "share_on_pinterest": "Share on Pinterest",
-      "share_with_whatsapp": "Share with WhatsApp",
-      "share_by_email": "Share with Email",
-      "get_link": "Get link",
-      "send_to_customer_service": "Send to customer service",
-      "add_all_to_cart": "Add wishlist to cart"
+      "from_price": "From {{ price }}",
+      "quantity": "Quantity"
+    },
+    "wishlist_share": {
+      "label": "Share wishlist",
+      "link_copied": "Link copied",
+      "share_title": "My Wishlist",
+      "share_message": "Here is a link to my wishlist."
+    },
+    "wishlist_messages": {
+      "wishlist_add_success_html": "Product added to list",
+      "wishlist_remove_success_html": "Product removed from list",
+      "wishlist_add-to-cart_success_html": "Product added to cart"
     }
   }
 }
