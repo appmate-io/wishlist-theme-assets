@@ -1,0 +1,34 @@
+wishlist-link .wk-button {
+  --icon-size: 20px;
+  --icon-stroke-width: 1px;
+
+  height: 4.4rem;
+  width: 4.4rem;
+  color: rgb(var(--color-foreground));
+}
+
+wishlist-link .wk-selected {
+  --icon-fill: transparent;
+}
+
+wishlist-link .wk-pill {
+  --size: 17px;
+
+  font-size: .9rem;
+  color: rgb(var(--color-button-text));
+  background-color: rgb(var(--color-button));
+}
+
+wishlist-button .wk-button,
+wishlist-button .wk-floating .wk-button {
+  --icon-stroke: rgba(var(--color-button), var(--alpha-button-background));
+
+  color: rgba(var(--color-button), var(--alpha-button-background));
+}
+
+wishlist-button .wk-button {
+  font-size: 1.5rem;
+  letter-spacing: .1rem; 
+  font-weight: 400;
+  font-family: inherit;
+}

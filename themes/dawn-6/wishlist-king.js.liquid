@@ -17,8 +17,8 @@ export const createApp = ({ settings, config, locale }) => {
   });
 
   app.events.subscribe("wk:app:load-styles:success", () => {
-    initComponents(app);
     initEvents(app);
+    initComponents(app);
   });
 
   return app;
@@ -31,7 +31,7 @@ const initComponents = (app) => {
   // Header link
   watch(
     {
-      selector: ".js-drawer-open-cart",
+      selector: `.header__icons .header__icon--cart`,
     },
     (target) => {
       target.insertBefore(
@@ -51,7 +51,7 @@ const initComponents = (app) => {
               },
               offset: {
                 mainAxis: 8,
-                alignmentAxis: 5,
+                alignmentAxis: 0,
               },
             },
           },
@@ -86,13 +86,12 @@ const initComponents = (app) => {
   // Product collection
   watch(
     {
-      selector: `.grid-product__link[href*="/products/"]`,
-      pageType: ["home", "product", "collection"],
+      selector: `.card__information a[href*="/products/"]`,
+      pageType: ["home", "product", "collection", "cart"],
       skipHidden: true,
     },
     (target) => {
-      const parent = target.closest({ position: "relative" });
-      parent.append(
+      target.insertAfter(
         createComponent("wishlist-button", {
           dataset: {
             productHandle: getProductHandleFromUrl(target.element.href),
@@ -100,9 +99,11 @@ const initComponents = (app) => {
           },
           props: {
             layout: "icon-only",
-            icon: "wishlist",
+            alignment: "center",
+            fullWidth: false,
+            outline: false,
             floating: {
-              reference: parent.element,
+              reference: target.closest(".card--media"),
               position: {
                 placement: "top-end",
                 inset: true,
@@ -118,22 +119,52 @@ const initComponents = (app) => {
   // Wishlist page
   watch(
     {
-      selector: "#wishlist-page",
+      selector: `#wishlist-page`,
     },
     (target) => {
       target.replace(
         createComponent("wishlist-page", {
-          wishlistId: app.utils.url.getWishlistIdFromUrl(
-            window.location.pathname
-          ),
+          dataset: {
+            wishlistId: app.utils.url.getWishlistIdFromUrl(
+              window.location.pathname
+            ),
+          },
         })
       );
     }
   );
+
+  // Save for later
+  // watch(
+  //   {
+  //     selector: `.cart-item__name[href*="/products/"]`,
+  //     pageType: ["cart"],
+  //   },
+  //   (target) => {
+  //     target
+  //       .closest(".cart-item")
+  //       .find(".cart-item__quantity")
+  //       .append(
+  //         createComponent("wishlist-save-for-later", {
+  //           dataset: {
+  //             productHandle: getProductHandleFromUrl(target.element.href),
+  //             variantId: getVariantIdFromUrl(target.element.href),
+  //           },
+  //         })
+  //       );
+  //   }
+  // );
 };
 
 const initEvents = (app) => {
   app.events.subscribe("wk:wishlist:add-to-cart:success", (event) => {
     window.location.href = app.routes.cartUrl;
+  });
+
+  app.events.subscribe("wk:wishlist:login-required", (event) => {
+    const ignoreActions = ["wishlist:private:load"];
+    if (!ignoreActions.includes(event.data.action)) {
+      window.location.href = app.routes.accountLoginUrl;
+    }
   });
 };
