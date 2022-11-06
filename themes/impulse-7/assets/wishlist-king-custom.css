@@ -15,7 +15,7 @@ wishlist-link .wk-button {
 }
 
 wishlist-product-card {
-  --image-aspect-ratio: 1 / 1.5;
+  --image-aspect-ratio: 1 / 1;
 }
 
 wk-select .wk-single-option {
