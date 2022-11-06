@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <!-- ... -->
+    <script>window.WishlistKingEmbed={config:{customerId:"{{ customer.id }}",customerEmail:"{{ customer.email }}",shopName:"{{ shop.name | replace: '&amp;', '&' }}",shopDomain:"{{ shop.domain }}",shopPermanentDomain:"{{ shop.permanent_domain }}",shopCurrency:"{{ shop.currency }}",shopMoneyFormat:"{{ shop.money_format }}",shopCustomerAccountsEnabled:"{{ shop.customer_accounts_enabled }}"}};</script>
+    <script type="module">window.WishlistKingEmbed && Promise.all([import("{{ 'wishlist-king-settings.js' | asset_url }}"),import("{{ 'wishlist-king.js' | asset_url }}"),]).then(([{ default: settings }, { createApp }]) => {window.WishlistKing = createApp({config: window.WishlistKingEmbed.config,locale: JSON.parse(`{{ 'app_wishlist-king' | t | replace: '&quot;', '"' | replace: '=&gt;', ':' }}`),settings});});</script>
+  </head>
+  <body>
+    <!-- ... -->
+  </body>
+</html>
