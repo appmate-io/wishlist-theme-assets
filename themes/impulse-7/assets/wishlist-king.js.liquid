@@ -1,0 +1,139 @@
+import { WishlistApp } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.14.7";
+import "{{ 'wishlist-king-components.js' | asset_url }}";
+
+export const createApp = ({ settings, config, locale }) => {
+  if (window.WishlistKing) {
+    return;
+  }
+
+  const app = new WishlistApp({
+    config,
+    settings,
+    locale,
+    stylesheets: [
+      "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.14.7/components/themes/default.css",
+      "{{ 'wishlist-king-custom.css' | asset_url }}",
+    ],
+  });
+
+  app.events.subscribe("wk:app:load-styles:success", () => {
+    initComponents(app);
+    initEvents(app);
+  });
+
+  return app;
+};
+
+const initComponents = (app) => {
+  const { watch, createComponent, createElement } = app.utils.dom;
+  const { getProductHandleFromUrl, getVariantIdFromUrl } = app.utils.url;
+
+  // Header link
+  watch(
+    {
+      selector: ".js-drawer-open-cart",
+    },
+    (target) => {
+      target.insertBefore(
+        createComponent("wishlist-link", {
+          props: {
+            layout: "icon-only",
+            alignment: "center",
+            fullWidth: false,
+            outline: false,
+            badgeLayout: "pill-and-text",
+            badgeParentheses: false,
+            badgeHiddenIfEmpty: true,
+            badgeFloating: {
+              position: {
+                placement: "bottom-end",
+                inset: true,
+              },
+              offset: {
+                mainAxis: 8,
+                alignmentAxis: 5,
+              },
+            },
+          },
+        })
+      );
+    }
+  );
+
+  watch(
+    {
+      selector: `form[action="${app.routes.cartAddUrl}"] button[type="submit"]`,
+      pageType: ["product"],
+    },
+    (target) => {
+      target.closest("form").append(
+        createComponent("wishlist-button", {
+          dataset: {
+            productHandle: getProductHandleFromUrl(document.location.href),
+            variantId: getVariantIdFromUrl(document.location.href),
+          },
+          props: {
+            layout: "icon-and-text",
+            alignment: "center",
+            fullWidth: true,
+            outline: false,
+          },
+        })
+      );
+    }
+  );
+
+  // Product collection
+  watch(
+    {
+      selector: `.grid-product__link[href*="/products/"]`,
+      pageType: ["home", "product", "collection"],
+      skipHidden: true,
+    },
+    (target) => {
+      const parent = target.closest({ position: "relative" });
+      parent.append(
+        createComponent("wishlist-button", {
+          dataset: {
+            productHandle: getProductHandleFromUrl(target.element.href),
+            variantId: getVariantIdFromUrl(target.element.href),
+          },
+          props: {
+            layout: "icon-only",
+            icon: "wishlist",
+            floating: {
+              reference: parent.element,
+              position: {
+                placement: "top-end",
+                inset: true,
+              },
+              offset: 0,
+            },
+          },
+        })
+      );
+    }
+  );
+
+  // Wishlist page
+  watch(
+    {
+      selector: "#wishlist-page",
+    },
+    (target) => {
+      target.replace(
+        createComponent("wishlist-page", {
+          wishlistId: app.utils.url.getWishlistIdFromUrl(
+            window.location.pathname
+          ),
+        })
+      );
+    }
+  );
+};
+
+const initEvents = (app) => {
+  app.events.subscribe("wk:wishlist:add-to-cart:success", (event) => {
+    window.location.href = app.routes.cartUrl;
+  });
+};
