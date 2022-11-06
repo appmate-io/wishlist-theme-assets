@@ -3,6 +3,10 @@ wishlist-link .wk-button {}
 wishlist-button .wk-button,
 wishlist-button .wk-floating .wk-button {}
 
+wishlist-product-card {
+  --image-aspect-ratio: 1 / 1;
+}
+
 wishlist-product-card .wk-submit-button {}
 
 wishlist-product-card .wk-meta {}

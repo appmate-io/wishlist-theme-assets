@@ -27,7 +27,7 @@ export class WishlistPage extends LiquidElement {
     return `
       <section class="wk-page">
         <div class="wk-header">
-          <h1 class="wk-title">{{ 'general.wishlist' | t }}</h1>
+          <h1 class="wk-title">{{ 'wishlist_page.title' | t }}</h1>
           {%- if wishlist.id -%}
             {%- unless wishlist.num_items == 0 -%}
               <div class="wk-controls">
@@ -48,12 +48,12 @@ export class WishlistPage extends LiquidElement {
         <div class="wk-body">
           {%- if wishlist.num_items == 0 -%}
             <div class="wk-wishlist-empty-note">
-              <p>{{ 'general.wishlist_empty_note' | t }}</p>
+              <p>{{ 'wishlist_page.wishlist_empty_callout_html' | t }}</p>
             </div>
           {%- else -%}
             {%- unless customer or wishlist.is_mine == false or shop.customer_accounts_enabled == false -%}
               <div class="wk-login-note">
-                <p>{{ 'general.login_or_signup_note_html' | t: login_url: routes.account_login_url, register_url: routes.account_register_url }}</p>
+                <p>{{ 'wishlist_page.login_callout_html' | t: login_url: routes.account_login_url, register_url: routes.account_register_url }}</p>
               </div>
             {%- endunless -%}
             <wk-grid>
@@ -153,7 +153,7 @@ export class WishlistProductCard extends LiquidElement {
           </div>
           <div class="wk-meta">
             <span class="wk-vendor">&nbsp;</span>
-            <span class="wk-product-title">{{ 'general.product_removed' | t }}</span>
+            <span class="wk-product-title">{{ 'wishlist_page.product_removed_html' | t }}</span>
           </div>
           {%- if wishlist.is_mine -%}
             <remove-button
@@ -189,7 +189,7 @@ export class WishlistProductCard extends LiquidElement {
                 <span class="wk-compare-price">{{ variant.compare_at_price | money }}</span>
               {%- else -%}
                 {%- assign from_price = product.price_min | money -%}
-                <span class="wk-current-price">{{ 'general.from_price' | t: price: from_price }}</span>
+                <span class="wk-current-price">{{ 'wishlist_product.from_price_html' | t: price: from_price }}</span>
               {%- endif -%}
             </div>
           </div>
@@ -210,7 +210,7 @@ export class WishlistProductCard extends LiquidElement {
                     text="{{ option.selected_value | default: option.name }}"
                   >
                     {%- if option.selected_value == null or option.unavailable_values contains option.selected_value -%}
-                      <option value>- {{ 'general.select_variant' | t: name: option.name }} -</option>
+                      <option value>- {{ 'wishlist_product.select_variant' | t: name: option.name }} -</option>
                     {%- endif -%}
                     {%- for value in option.values -%}
                       {%- assign soldout = option.soldout_values contains value -%}
@@ -221,7 +221,7 @@ export class WishlistProductCard extends LiquidElement {
                           value="{{ value | escape }}"
                           {%- if selected %} selected{%- endif -%}
                         >
-                          {{ value }}{%- if soldout %} ({{ 'general.sold_out' | t }}){%- endif -%}
+                          {{ value }}{%- if soldout %} ({{ 'wishlist_product.sold_out' | t }}){%- endif -%}
                         </option>
                       {%- endunless -%}
                     {%- endfor -%}
@@ -230,7 +230,7 @@ export class WishlistProductCard extends LiquidElement {
               </div>
             {%- endunless -%}
             <div class="wk-quantity">
-              <label class="wk-quantity-label">{{ 'general.quantity' | t }}</label>
+              <label class="wk-quantity-label">{{ 'wishlist_product.quantity' | t }}</label>
               <input class="wk-quantity-input" type="number" name="quantity" value="1" min="1">
             </div>
             <button 
@@ -241,13 +241,13 @@ export class WishlistProductCard extends LiquidElement {
             >
               <span class="wk-submit-label">
                 {%- if variant.available -%}
-                  {{ 'general.add_to_cart' | t }}
+                  {{ 'wishlist_product.add_to_cart' | t }}
                 {%- elsif variant == null and form.has_selection -%}
-                  {{ 'general.unavailable' | t }}
+                  {{ 'wishlist_product.unavailable' | t }}
                 {%- elsif variant == null -%}
-                  {{ 'general.select_variant' | t }}
+                  {{ 'wishlist_product.select_variant' | t }}
                 {%- else -%}
-                  {{ 'general.sold_out' | t }}
+                  {{ 'wishlist_product.sold_out' | t }}
                 {%- endif -%}
               </span>
               <wk-icon icon="spinner" class="wk-submit-spinner"></wk-icon>
@@ -337,11 +337,15 @@ export class WishlistButton extends WishlistElement {
       this.state.productInfo && this.state.productInfo.inWishlist;
 
     const text = this.getTranslation(
-      inWishlist ? "general.in_wishlist" : "general.add_to_wishlist"
+      inWishlist
+        ? "wishlist_buttons.product_in_wishlist"
+        : "wishlist_buttons.add_product"
     );
 
     const hint = this.getTranslation(
-      inWishlist ? "general.remove_from_wishlist" : "general.add_to_wishlist"
+      inWishlist
+        ? "wishlist_buttons.remove_product"
+        : "wishlist_buttons.add_product"
     );
 
     return html`
@@ -386,8 +390,8 @@ export class RemoveButton extends WishlistElement {
   }
 
   render() {
-    const text = this.getTranslation("general.remove_from_wishlist");
-    const hint = this.getTranslation("general.remove_from_wishlist");
+    const text = this.getTranslation("wishlist_buttons.remove_product");
+    const hint = this.getTranslation("wishlist_buttons.remove_product");
 
     return html`
       <wk-button
@@ -436,8 +440,8 @@ export class WishlistLink extends WishlistElement {
 
   render() {
     const wishlistUrl = this.getWishlistUrl();
-    const text = this.getTranslation("general.wishlist");
-    const hint = this.getTranslation("general.view_wishlist");
+    const text = this.getTranslation("wishlist_buttons.wishlist");
+    const hint = this.getTranslation("wishlist_buttons.view_wishlist");
 
     return html`
       <wk-button
@@ -488,8 +492,8 @@ export class WishlistShare extends WishlistElement {
   async handleClick() {
     const { clipboard } = await this.app.shareWishlist({
       wishlistId: this.state.wishlist.publicId,
-      title: this.getTranslation("general.share_list_title"),
-      text: this.getTranslation("general.share_list_description"),
+      title: this.getTranslation("wishlist_share.share_title"),
+      text: this.getTranslation("wishlist_share.share_message"),
     });
 
     if (clipboard) {
@@ -501,7 +505,9 @@ export class WishlistShare extends WishlistElement {
 
   render() {
     const text = this.getTranslation(
-      this.linkCopied ? "general.share_link_copied" : "general.share_wishlist"
+      this.linkCopied
+        ? "wishlist_share.link_copied"
+        : "wishlist_share.button_label"
     );
 
     return html`
@@ -547,7 +553,7 @@ export class WishlistBuyAll extends WishlistElement {
   }
 
   render() {
-    const text = this.getTranslation("general.add_all_to_cart");
+    const text = this.getTranslation("wishlist_page.add_all_to_cart");
 
     return html`
       <wk-button
@@ -599,11 +605,15 @@ export class WishlistSaveForLater extends WishlistElement {
       this.state.productInfo && this.state.productInfo.inWishlist;
 
     const text = this.getTranslation(
-      inWishlist ? "general.in_wishlist" : "general.save_for_later"
+      inWishlist
+        ? "wishlist_buttons.product_in_wishlist"
+        : "wishlist_buttons.save_for_later"
     );
 
     const hint = this.getTranslation(
-      inWishlist ? "general.in_wishlist" : "general.save_for_later"
+      inWishlist
+        ? "wishlist_buttons.product_in_wishlist"
+        : "wishlist_buttons.save_for_later"
     );
 
     return html`
