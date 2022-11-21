@@ -1,5 +1,6 @@
 wishlist-link .wk-button {
   --icon-size: 20px;
+  --icon-stroke: rgb(var(--color-foreground));
   --icon-stroke-width: 1px;
 
   height: 4.4rem;
