@@ -1,0 +1,34 @@
+wishlist-link .wk-button {
+  --icon-size: 16px;
+  --icon-stroke: #3c3c3c;
+  margin: 0 10px;
+}
+
+wishlist-button .wk-button,
+wishlist-button .wk-floating .wk-button {}
+
+wishlist-button .wk-floating {
+  z-index: 5;
+}
+
+wishlist-page .wk-page {
+   margin-bottom: 3em;
+}
+
+wishlist-product-card {
+  --image-aspect-ratio: 1 / 1;
+}
+
+wishlist-product-card .wk-submit-button {
+  background: var(--secondary-btn-bg-color);
+  color: var(--secondary-btn-text-color);
+  transition: color .25s ease-in-out,background .25s ease-in-out;
+}
+
+wishlist-product-card .wk-meta {}
+
+wishlist-product-card .wk-product-title {}
+
+wishlist-product-card .wk-vendor {}
+
+wishlist-product-card .wk-price {}
