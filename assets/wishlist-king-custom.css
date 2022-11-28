@@ -1,7 +1,19 @@
-wishlist-link .wk-button {}
+wishlist-link .wk-button {
+  --icon-size: 18px;
+  --icon-stroke: black
+}
+
+wishlist-button .wk-floating {
+  z-index: 1;
+}
 
 wishlist-button .wk-button,
-wishlist-button .wk-floating .wk-button {}
+wishlist-button .wk-floating .wk-button {
+  --icon-size: 18px;
+  --icon-stroke: black
+}
+
+wishlist-page .wk-page {}
 
 wishlist-product-card {
   --image-aspect-ratio: 1 / 1;

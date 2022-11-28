@@ -20,7 +20,7 @@
     },
     "wishlist_product": {
       "add_to_cart": "Add to Cart",
-      "select_variant": "Select variant",
+      "select_option": "Select {{ name }}",
       "sold_out": "Sold Out",
       "unavailable": "Unavailable",
       "view_product": "View product",

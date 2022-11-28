@@ -1,5 +1,4 @@
-import { WishlistApp } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.14.7";
-import "{{ 'wishlist-king-components.js' | asset_url }}";
+import { WishlistApp } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.2/wishlist-app.js";
 
 export const createApp = ({ settings, config, locale }) => {
   if (window.WishlistKing) {
@@ -10,24 +9,20 @@ export const createApp = ({ settings, config, locale }) => {
     config,
     settings,
     locale,
-    stylesheets: [
-      "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.14.7/components/themes/default.css",
+    dependencies: [
+      "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.2/components/wishlist.css",
       "{{ 'wishlist-king-custom.css' | asset_url }}",
+      "{{ 'wishlist-king-components.js' | asset_url }}",
     ],
   });
 
-  app.events.subscribe("wk:app:load-styles:success", () => {
-    initEvents(app);
-    initComponents(app);
-  });
+  initEvents(app);
+  initComponents(app);
 
   return app;
 };
 
-const initComponents = (app) => {
-  const { watch, createComponent, createElement } = app.utils.dom;
-  const { getProductHandleFromUrl, getVariantIdFromUrl } = app.utils.url;
-
+const initComponents = ({ theme, routes }) => {
   // Header link
   watch(
     {
@@ -60,43 +55,18 @@ const initComponents = (app) => {
     }
   );
 
-  // Product page
-  watch(
-    {
-      selector: `form[action="${app.routes.cartAddUrl}"] button[type="submit"]`,
-      pageType: ["product"],
-    },
-    (target) => {
-      target.insertAfter(
-        createComponent("wishlist-button", {
-          dataset: {
-            productHandle: getProductHandleFromUrl(document.location.href),
-            variantId: getVariantIdFromUrl(document.location.href),
-          },
-          props: {
-            layout: "icon-and-text",
-            alignment: "center",
-            fullWidth: true,
-            outline: false,
-          },
-        })
-      );
-    }
-  );
-
-  // Collections
-  watch(
+  // Grid items
+  theme.watch(
     {
       selector: `.xxx-grid-item-xxx a[href*="/products/"]`,
       pageType: ["home", "product", "collection"],
-      skipHidden: true,
     },
     (target) => {
       target.insertAfter(
-        createComponent("wishlist-button", {
+        theme.createComponent("wishlist-button", {
           dataset: {
-            productHandle: getProductHandleFromUrl(target.element.href),
-            variantId: getVariantIdFromUrl(target.element.href),
+            productHandle: theme.getProductHandle(target.element.href),
+            variantId: theme.getVariantId(target.element.href),
           },
           props: {
             layout: "icon-only",
@@ -117,18 +87,40 @@ const initComponents = (app) => {
     }
   );
 
+  // Product page
+  theme.watch(
+    {
+      selector: `form[action="${routes.cartAddUrl}"] button[type="submit"]`,
+      pageType: ["product"],
+    },
+    (target) => {
+      target.insertAfter.append(
+        theme.createComponent("wishlist-button", {
+          dataset: {
+            productHandle: theme.getProductHandle(document.location.href),
+            variantId: theme.getVariantId(document.location.href),
+          },
+          props: {
+            layout: "icon-and-text",
+            alignment: "center",
+            fullWidth: true,
+            outline: false,
+          },
+        })
+      );
+    }
+  );
+
   // Wishlist page
-  watch(
+  theme.watch(
     {
       selector: "#wishlist-page",
     },
     (target) => {
       target.replace(
-        createComponent("wishlist-page", {
+        theme.createComponent("wishlist-page", {
           dataset: {
-            wishlistId: app.utils.url.getWishlistIdFromUrl(
-              window.location.pathname
-            ),
+            wishlistId: theme.getWishlistId(window.location.pathname),
           },
         })
       );
