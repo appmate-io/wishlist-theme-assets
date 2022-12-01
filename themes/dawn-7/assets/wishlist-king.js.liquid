@@ -1,0 +1,140 @@
+import { WishlistApp } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.4/wishlist-app.js";
+
+export const createApp = ({ settings, config, locale }) => {
+  if (window.WishlistKing) {
+    return;
+  }
+
+  const app = new WishlistApp({
+    config,
+    settings,
+    locale,
+    dependencies: [
+      "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.4/components/wishlist.css",
+      "{{ 'wishlist-king-custom.css' | asset_url }}",
+      "{{ 'wishlist-king-components.js' | asset_url }}",
+    ],
+  });
+
+  initEvents(app);
+  initComponents(app);
+
+  return app;
+};
+
+const initComponents = ({ theme, routes }) => {
+  // Header link
+  theme.watch(
+    {
+      selector: `.header__icons .header__icon--cart`,
+    },
+    (target) => {
+      target.insertBefore(
+        theme.createComponent("wishlist-link", {
+          props: {
+            layout: "icon-only",
+            alignment: "center",
+            badgeLayout: "pill-and-text",
+            badgeParentheses: false,
+            badgeHiddenIfEmpty: true,
+            badgeFloating: {
+              position: {
+                placement: "bottom-end",
+                inset: true,
+              },
+              offset: {
+                mainAxis: 8,
+                alignmentAxis: 0,
+              },
+            },
+          },
+        })
+      );
+    }
+  );
+
+  // Grid items
+  theme.watch(
+    {
+      selector: `.card__information a[href*="/products/"]`,
+      pageType: ["home", "product", "collection"],
+    },
+    (target) => {
+      target.insertAfter(
+        theme.createComponent("wishlist-button", {
+          dataset: {
+            productHandle: theme.getProductHandle(target.element.href),
+            variantId: theme.getVariantId(target.element.href),
+          },
+          props: {
+            layout: "icon-only",
+            alignment: "center",
+            floating: {
+              reference: target.closest(".card--media"),
+              position: {
+                placement: "top-end",
+                inset: true,
+              },
+              offset: 0,
+            },
+          },
+        })
+      );
+    }
+  );
+
+  // Product page
+  theme.watch(
+    {
+      selector: `.form[action="${routes.cartAddUrl}"] .product-form__buttons`,
+      pageType: ["product"],
+    },
+    (target) => {
+      target.append(
+        theme.createComponent("wishlist-button", {
+          dataset: {
+            productHandle: theme.getProductHandle(document.location.href),
+            variantId: theme.getVariantId(document.location.href),
+          },
+          props: {
+            layout: "icon-and-text",
+            alignment: "center",
+            fullWidth: true,
+            outline: false,
+          },
+        })
+      );
+    }
+  );
+
+  // Wishlist page
+  theme.watch(
+    {
+      selector: "#wishlist-page",
+    },
+    (target) => {
+      target.replace(
+        theme.createComponent("wishlist-page", {
+          dataset: {
+            wishlistId: theme.getWishlistId(window.location.pathname),
+          },
+        })
+      );
+    }
+  );
+};
+
+const initEvents = (app) => {
+  app.events.subscribe("wk:wishlist:add-to-cart:success", (event) => {
+    window.location.href = app.routes.cartUrl;
+  });
+  app.events.subscribe("wk:wishlist:add-all-to-cart:success", (event) => {
+    window.location.href = app.routes.cartUrl;
+  });
+  app.events.subscribe("wk:wishlist:login-required", (event) => {
+    const ignoreActions = ["wishlist:private:load"];
+    if (!ignoreActions.includes(event.data.action)) {
+      window.location.href = app.routes.accountLoginUrl;
+    }
+  });
+};
