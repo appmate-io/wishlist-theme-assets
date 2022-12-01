@@ -1,0 +1,109 @@
+wishlist-link .wk-button {
+  --icon-size: 20px;
+  --icon-stroke: var(--colorNavText);
+  --icon-stroke-width: 1.75px;
+  --badge-size: 15px;
+
+  display: inline-flex;
+  padding: 7.5px 12px;
+  vertical-align: middle;
+}
+
+.is-light wishlist-link .wk-button {
+  --icon-stroke: white;
+}
+
+@media only screen and (max-width: 959px) {
+  wishlist-link .wk-button {
+    padding: 7.5px 2px;
+  }
+
+  wishlist-link .wk-pill {
+    left: 10px;
+  }
+}
+
+wishlist-link .wk-selected {
+  --icon-fill: transparent;
+}
+
+wishlist-link .wk-pill {
+  background: var(--colorCartDot);
+  border: 2px solid var(--colorBody);
+}
+
+wishlist-button .wk-floating {
+  z-index: 1;
+}
+
+wishlist-button .wk-button,
+wishlist-button .wk-floating .wk-button {
+  --icon-size: 18px;
+  --icon-stroke: black;
+}
+
+wishlist-page .wk-page {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+@media only screen and (min-width: 769px) {
+   wishlist-page .wk-page {
+    padding-top: 75px;
+    padding-bottom: 75px;
+  }
+}
+
+wishlist-product-card .wk-image {
+  aspect-ratio: 1 / 1;
+}
+
+wishlist-product-card .wk-submit-button {
+  font-size: calc(var(--typeBaseSize) - 2px);
+  font-weight: var(--typeBaseWeight);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  border-radius: var(--buttonRadius);
+  color: var(--colorBtnPrimaryText);
+  background: var(--colorBtnPrimary);
+}
+
+wishlist-product-card .wk-meta {
+  text-align: center;
+}
+
+wishlist-product-card .wk-product-title {
+  font-size: calc(var(--typeBaseSize)*1.22);
+  font-weight: var(--typeBaseWeight);
+  font-style: var(--typeBaseStyle);
+  line-height: calc(var(--typeBaseLineHeight) - .1);
+  letter-spacing: var(--typeBaseSpacing);
+  text-transform: uppercase;
+}
+
+wishlist-product-card .wk-price {
+  margin-top: 3px;
+  font-size: calc(var(--typeBaseSize)*.85 - 1.7px);
+  justify-content: center;
+}
+
+@media only screen and (min-width: 769px) {
+  wishlist-product-card .wk-price {
+    font-size: var(--typeBaseSize);
+  }
+}
+
+wishlist-product-card .wk-option-select .wk-label {
+  margin-bottom: 0;
+}
+
+wishlist-page .wk-grid {
+  --columns: 1;
+} 
+
+@media (min-width: 900px) {
+  wishlist-page .wk-grid {
+    --columns: 3;
+  } 
+}
