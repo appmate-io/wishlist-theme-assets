@@ -33,3 +33,25 @@ wishlist-button .wk-button {
   font-weight: 400;
   font-family: inherit;
 }
+
+wishlist-page .wk-grid {
+  --columns: 1;
+} 
+
+@media (min-width: 400px) {
+  wishlist-page .wk-grid {
+    --columns: 2;
+  } 
+}
+
+@media (min-width: 700px) {
+  wishlist-page .wk-grid {
+    --columns: 3;
+  } 
+}
+
+@media (min-width: 900px) {
+  wishlist-page .wk-grid {
+    --columns: 4;
+  } 
+}
