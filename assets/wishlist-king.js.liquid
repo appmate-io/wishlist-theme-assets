@@ -1,4 +1,4 @@
-import { WishlistApp } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.2/wishlist-app.js";
+import { WishlistApp } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.4/wishlist-app.js";
 
 export const createApp = ({ settings, config, locale }) => {
   if (window.WishlistKing) {
@@ -10,7 +10,7 @@ export const createApp = ({ settings, config, locale }) => {
     settings,
     locale,
     dependencies: [
-      "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.2/components/wishlist.css",
+      "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.4/components/wishlist.css",
       "{{ 'wishlist-king-custom.css' | asset_url }}",
       "{{ 'wishlist-king-components.js' | asset_url }}",
     ],
@@ -24,18 +24,16 @@ export const createApp = ({ settings, config, locale }) => {
 
 const initComponents = ({ theme, routes }) => {
   // Header link
-  watch(
+  theme.watch(
     {
-      selector: ".xxx-header-link-xxx",
+      selector: ".xxx-header-cart-link-xxx",
     },
     (target) => {
       target.insertBefore(
-        createComponent("wishlist-link", {
+        theme.createComponent("wishlist-link", {
           props: {
             layout: "icon-only",
             alignment: "center",
-            fullWidth: false,
-            outline: false,
             badgeLayout: "pill-and-text",
             badgeParentheses: false,
             badgeHiddenIfEmpty: true,
@@ -58,7 +56,7 @@ const initComponents = ({ theme, routes }) => {
   // Grid items
   theme.watch(
     {
-      selector: `.xxx-grid-item-xxx a[href*="/products/"]`,
+      selector: `.xxx-grid-item-link-xxx[href*="/products/"]`,
       pageType: ["home", "product", "collection"],
     },
     (target) => {
@@ -71,8 +69,6 @@ const initComponents = ({ theme, routes }) => {
           props: {
             layout: "icon-only",
             alignment: "center",
-            fullWidth: false,
-            outline: false,
             floating: {
               reference: target,
               position: {
@@ -90,11 +86,11 @@ const initComponents = ({ theme, routes }) => {
   // Product page
   theme.watch(
     {
-      selector: `form[action="${routes.cartAddUrl}"] button[type="submit"]`,
+      selector: `.xxx-product-form-xxx[action="${routes.cartAddUrl}"]`,
       pageType: ["product"],
     },
     (target) => {
-      target.insertAfter.append(
+      target.append(
         theme.createComponent("wishlist-button", {
           dataset: {
             productHandle: theme.getProductHandle(document.location.href),
