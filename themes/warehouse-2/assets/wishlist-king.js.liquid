@@ -26,41 +26,43 @@ const initComponents = ({ theme, routes }) => {
   // Header link
   theme.watch(
     {
-      selector: ".top-links--icon-links li:last-of-type",
+      selector: ".header__action-item--cart",
     },
     (target) => {
       target.insertBefore(
         theme.createComponent("wishlist-link", {
+          wrap: {
+            name: "div",
+            props: {
+              className: "header__action-item header__action-item--wishlist",
+            },
+          },
           props: {
-            layout: "icon-only",
+            layout: "icon-text",
             alignment: "center",
+            badgeLayout: "pill-text",
+            badgeParentheses: false,
+            badgeHiddenIfEmpty: false,
+            badgeFloating: {
+              position: {
+                placement: "top-start",
+                inset: true,
+              },
+              offset: {
+                mainAxis: -2,
+                alignmentAxis: 17,
+              },
+            },
           },
         })
       );
     }
   );
 
-  // Header link (mobile)
+  // Grid items
   theme.watch(
     {
-      selector: ".site-nav--mobile .js-drawer-open-right-link",
-    },
-    (target) => {
-      target.insertBefore(
-        theme.createComponent("wishlist-link", {
-          props: {
-            layout: "icon-only",
-            alignment: "center",
-          },
-        })
-      );
-    }
-  );
-
-  // Collections
-  theme.watch(
-    {
-      selector: `.grid__image[href*="/products/"]`,
+      selector: `.product-item__image-wrapper[href*="/products/"]`,
       pageType: ["home", "product", "collection"],
     },
     (target) => {
@@ -73,8 +75,6 @@ const initComponents = ({ theme, routes }) => {
           props: {
             layout: "icon-only",
             alignment: "center",
-            fullWidth: false,
-            outline: false,
             floating: {
               reference: target,
               position: {
@@ -92,7 +92,7 @@ const initComponents = ({ theme, routes }) => {
   // Product page
   theme.watch(
     {
-      selector: `.paymentButtonsWrapper`,
+      selector: `.product-form__payment-container`,
       pageType: ["product"],
     },
     (target) => {

@@ -34,7 +34,15 @@ wishlist-button .wk-button {
   font-family: inherit;
 }
 
-wishlist-page .wk-page {}
+wishlist-page .wk-page {
+  padding-bottom: 27px;
+}
+
+@media screen and (min-width: 750px) {
+  wishlist-page .wk-page {
+    padding-bottom: 36px;
+  }
+}
 
 wishlist-product-card .wk-image {
   aspect-ratio: 1 / 1;

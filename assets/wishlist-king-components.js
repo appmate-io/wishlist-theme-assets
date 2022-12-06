@@ -1,11 +1,11 @@
 import { html } from "https://cdn.jsdelivr.net/npm/lit-html@2.4.0/+esm";
 import { repeat } from "https://cdn.jsdelivr.net/npm/lit-html@2.4.0/directives/repeat.js";
-import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.4/wishlist-element.js";
-import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.4/controllers.js";
-import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.4/components/icon.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.4/components/button.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.4/components/badge.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.4/components/option-select.js";
+import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.7/wishlist-element.js";
+import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.7/controllers.js";
+import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.7/components/icon.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.7/components/button.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.7/components/badge.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.17.7/components/option-select.js";
 
 export class WishlistPage extends WishlistElement {
   getStateConfig() {
@@ -777,21 +777,13 @@ Icon.addIcons({
     </svg>
   `,
   share: `
-    <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 122.88 122.88">
-      <path d="M60.54,34.07A7.65,7.65,0,0,1,49.72,23.25l13-12.95a35.38,35.38,0,0,1,49.91,0l.07.08a35.37,35.37,0,0,1-.07,49.83l-13,12.95A7.65,7.65,0,0,1,88.81,62.34l13-13a20.08,20.08,0,0,0,0-28.23l-.11-.11a20.08,20.08,0,0,0-28.2.07l-12.95,13Zm14,3.16A7.65,7.65,0,0,1,85.31,48.05L48.05,85.31A7.65,7.65,0,0,1,37.23,74.5L74.5,37.23ZM62.1,89.05A7.65,7.65,0,0,1,72.91,99.87l-12.7,12.71a35.37,35.37,0,0,1-49.76.14l-.28-.27a35.38,35.38,0,0,1,.13-49.78L23,50A7.65,7.65,0,1,1,33.83,60.78L21.12,73.49a20.09,20.09,0,0,0,0,28.25l0,0a20.07,20.07,0,0,0,28.27,0L62.1,89.05Z"/>
+    <svg width="24px" height="24px" viewBox="0 0 24 24">
+      <path d="M20 13v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6M12 15V3m0 0L8.5 6.5M12 3l3.5 3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
     </svg>
   `,
   buy: `
-    <svg viewBox="0 0 490.399 490.399">
-      <path d="M490.086,464.75l-28.1-294.4c-1-10.4-10.4-18.7-20.8-18.7h-63.5v-17.7c0-72.8-59.3-133.2-133.2-133.2
-        c-72.8,0-133.2,59.3-133.2,133.2v17.7h-61.3c-11.4,0-19.8,8.3-20.8,18.7l-29.1,297.5c-1.4,17.7,14.6,21.8,20.8,21.8h449.4
-        C494.486,488.25,490.086,465.85,490.086,464.75z M152.986,133.95c0-51,41.6-92.6,92.6-92.6s92.6,41.6,92.6,92.6v17.7h-185.2
-        L152.986,133.95L152.986,133.95z M43.786,449.15l25-257h42.7v33.3c0,11.4,9.4,20.8,20.8,20.8c11.4,0,20.8-9.4,20.8-20.8v-33.3
-        h185.2v33.3c0,11.4,9.4,20.8,20.8,20.8c10.4,0,19.8-9.4,18.7-20.8v-33.3h44.7l25,257H43.786z" />
-      <path d="M306.986,314.95h-32.3c-8.3,0-14.6-6.2-14.6-14.6v-31.2c0-8.3-6.2-14.6-14.6-14.6s-14.6,6.2-14.6,14.6v31.2
-        c0,8.3-6.2,14.6-14.6,14.6h-32.3c-8.3,0-14.6,6.2-14.6,14.6c0,0-0.7,15.1,14.6,15.6h32.5c8.3,0,14.6,6.2,14.6,14.6v31.2
-        c0,8.3,6.2,14.6,14.6,14.6c8.4,0,14.6-6.2,14.6-14.6v-31.2c0-8.3,6.2-14.6,14.6-14.6h32.3c15.7-1.3,14.6-15.6,14.6-15.6
-        C321.586,321.15,315.286,314.95,306.986,314.95z" />
+    <svg viewBox="0 0 24 24">
+      <path d="M19.26 9.696l1.385 9A2 2 0 0118.67 21H5.33a2 2 0 01-1.977-2.304l1.385-9A2 2 0 016.716 8h10.568a2 2 0 011.977 1.696zM14 5a2 2 0 10-4 0" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
     </svg>
   `,
   spinner: `

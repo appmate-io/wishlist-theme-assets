@@ -1,0 +1,113 @@
+wishlist-link .wk-button {
+  --icon-size: 22px;
+  --icon-stroke: var(--link);
+  --icon-stroke-width: 0.8px;
+
+  height: 100%;
+  padding: 5px 11px;
+}
+
+.wk-icon svg, .wk-icon svg:not(:root) {
+  transition: .25s cubic-bezier(.215,.61,.355,1);
+  transition-property: fill, stroke;
+}
+
+wishlist-link .wk-button:hover {
+  --icon-stroke: var(--link-hover);
+}
+
+wishlist-link .wk-selected {
+  --icon-fill: transparent; 
+}
+
+wishlist-link .wk-pill {
+  background: var(--primary);
+  color: var(--bg);
+  font-size: calc(.589rem * var(--FONT-ADJUST-NAV));
+}
+
+wishlist-button .wk-floating {
+  z-index: 1;
+}
+
+wishlist-button .wk-button,
+wishlist-button .wk-floating .wk-button {
+  --icon-size: 18px;
+  --icon-stroke: var(--COLOR-PRIMARY);
+}
+
+wishlist-button .wk-button.wk-outline {
+  min-height: 46px;
+  border-color: var(--COLOR-PRIMARY);
+  color: var(--COLOR-PRIMARY);
+  margin-top: 1em;
+  padding: 0;
+}
+
+wishlist-page .wk-page {
+  padding: 2em 1em;
+}
+
+wishlist-page .wk-title {
+  font-size: calc(var(--font-6) * var(--FONT-ADJUST-HEADING));
+}
+
+wishlist-product-card .wk-image {
+  aspect-ratio: 1 / 1;
+}
+
+wishlist-product-card .wk-submit-button {
+  font-size: calc(var(--font-3) * var(--FONT-ADJUST-BODY));
+  font-family: inherit;
+  transition: .25s ease-out;
+  transition-property: color,background,border,box-shadow;
+  border: 1px solid var(--COLOR-PRIMARY);
+  border-radius: var(--RADIUS);
+  font-weight: var(--FONT-WEIGHT-BODY);
+  background: var(--COLOR-PRIMARY);
+  color: var(--COLOR-PRIMARY-OPPOSITE);
+}
+
+wishlist-product-card .wk-meta {}
+
+wishlist-product-card .wk-product-title {
+  font-weight: var(--FONT-WEIGHT-BODY);
+  font-size: calc(1rem * var(--FONT-ADJUST-BODY));
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+wishlist-product-card .wk-vendor {}
+
+wishlist-product-card .wk-price {
+  font-size: 14px;
+  color: var(--text-light);
+  justify-content: center;
+}
+
+wishlist-product-card .wk-current-price.wk-sale {
+  color: var(--COLOR-SALE);
+}
+
+wishlist-page .wk-grid {
+  --columns: 1;
+}
+
+@media (min-width: 400px) {
+  wishlist-page .wk-grid {
+    --columns: 2;
+  } 
+}
+
+@media (min-width: 700px) {
+  wishlist-page .wk-grid {
+    --columns: 3;
+  } 
+}
+
+@media (min-width: 900px) {
+  wishlist-page .wk-grid {
+    --columns: 4;
+  } 
+}
