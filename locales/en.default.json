@@ -15,6 +15,7 @@
       "wishlist_empty_callout_html": "Your wishlist is empty",
       "product_removed_html": "Product no longer available",
       "view_product": "View product",
+      "remove_product": "Remove",
       "add_all_to_cart": "Add wishlist to cart"
     },
     "wishlist_product": {

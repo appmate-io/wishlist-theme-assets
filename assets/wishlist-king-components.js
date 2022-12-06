@@ -15,7 +15,7 @@ export class WishlistPage extends WishlistElement {
   }
 
   render() {
-    if (!this.state.wishlist) {
+    if (!this.wishlist) {
       return;
     }
 
@@ -36,18 +36,18 @@ export class WishlistPage extends WishlistElement {
   }
 
   renderControls() {
-    if (!this.state.wishlist.items.length) {
+    if (!this.wishlist.items.length) {
       return;
     }
 
     return html`
       <div class="wk-controls">
         <wishlist-share
-          data-wishlist-id="${this.state.wishlist.id}"
+          data-wishlist-id="${this.wishlist.id}"
           layout="icon-and-text"
         ></wishlist-share>
         <wishlist-buy-all
-          data-wishlist-id="${this.state.wishlist.id}"
+          data-wishlist-id="${this.wishlist.id}"
           layout="icon-and-text"
         ></wishlist-buy-all>
       </div>
@@ -55,7 +55,7 @@ export class WishlistPage extends WishlistElement {
   }
 
   renderWishlistEmptyCallout() {
-    if (this.state.wishlist.items.length) {
+    if (this.wishlist.items.length) {
       return;
     }
 
@@ -71,8 +71,8 @@ export class WishlistPage extends WishlistElement {
   renderLoginCallout() {
     if (
       this.app.customer ||
-      !this.state.wishlist.isMine ||
-      !this.state.wishlist.items.length
+      !this.wishlist.isMine ||
+      !this.wishlist.items.length
     ) {
       return;
     }
@@ -90,11 +90,11 @@ export class WishlistPage extends WishlistElement {
   }
 
   renderWishlistItems() {
-    if (!this.state.wishlist.items.length) {
+    if (!this.wishlist.items.length) {
       return;
     }
 
-    const wishlistItems = this.state.wishlist.items.slice().reverse();
+    const wishlistItems = this.wishlist.items.slice().reverse();
 
     return html`
       <div class="wk-grid">
@@ -103,10 +103,10 @@ export class WishlistPage extends WishlistElement {
           (wishlistItem) => wishlistItem.id,
           (wishlistItem) => html`
             <wishlist-product-card
-              data-wishlist-id=${this.state.wishlist.id}
+              data-wishlist-id=${this.wishlist.id}
               data-wishlist-item-id=${wishlistItem.id}
-              .wishlistId=${this.state.wishlist.id}
-              .isMine=${this.state.wishlist.isMine}
+              .wishlistId=${this.wishlist.id}
+              .isMine=${this.wishlist.isMine}
             ></wishlist-product-card>
           `
         )}
@@ -127,21 +127,18 @@ export class WishlistProductCard extends WishlistElement {
 
   constructor() {
     super();
-    this.form = new ProductFormController(this, {
-      app: this.app,
-    });
+    this.form = new ProductFormController(this);
   }
 
-  updateState(state) {
-    if (state.wishlistItem) {
+  willUpdate(changedProperties) {
+    if (changedProperties.has("wishlistItem")) {
       this.form.setProduct({
-        product: state.wishlistItem.product,
-        selectedVariantId: state.wishlistItem.variantId,
-        autoSelect: this.app.settings.autoSelectVariantOnInit,
+        product: this.wishlistItem.product,
+        selectedVariantId: this.wishlistItem.variantId,
+        autoSelect:
+          this.app.settings.wishlistPage.variantAutoSelectMode === "ALWAYS",
       });
     }
-
-    super.updateState(state);
   }
 
   getStateConfig() {
@@ -161,7 +158,7 @@ export class WishlistProductCard extends WishlistElement {
 
         if (this.form.selectedVariant && this.isMine) {
           await this.app.updateWishlistItem({
-            wishlistItemId: this.state.wishlistItem.id,
+            wishlistItemId: this.wishlistItem.id,
             changes: {
               variantId: this.form.selectedVariant.id,
             },
@@ -173,26 +170,26 @@ export class WishlistProductCard extends WishlistElement {
 
         await this.form.addToCart({
           wishlistId: this.wishlistId,
-          wishlistItemId: this.state.wishlistItem.id,
+          wishlistItemId: this.wishlistItem.id,
         });
       },
     };
   }
 
   render() {
-    if (!this.state.wishlistItem.product.id) {
+    if (!this.wishlistItem.product.id) {
       return html`
         <div class="wk-product-card">${this.renderLoadingState()}</div>
       `;
     }
 
-    if (this.state.wishlistItem.product.hidden) {
+    if (this.wishlistItem.product.hidden) {
       return html`
         <div class="wk-product-card">${this.renderUnavailableState()}</div>
       `;
     }
 
-    const product = this.state.wishlistItem.product;
+    const product = this.wishlistItem.product;
     const variant = this.form.selectedVariant;
 
     return html`
@@ -288,7 +285,7 @@ export class WishlistProductCard extends WishlistElement {
         method="post"
         action=${this.app.routes.cartAddUrl}
         data-wishlist-id=${this.wishlistId}
-        data-wishlist-item-id=${this.state.wishlistItem.id}
+        data-wishlist-item-id=${this.wishlistItem.id}
       >
         <input
           name="id"
@@ -311,7 +308,7 @@ export class WishlistProductCard extends WishlistElement {
         <button
           type="submit"
           class="wk-submit-button"
-          data-wishlist-item-id=${this.state.wishlistItem.id}
+          data-wishlist-item-id=${this.wishlistItem.id}
           ?disabled=${!variant || !variant.available}
         >
           <span class="wk-submit-label">${getSubmitText()}</span>
@@ -329,7 +326,12 @@ export class WishlistProductCard extends WishlistElement {
     return html`
       ${this.form.optionsWithValues.map(
         (option) =>
-          html`<wk-option-select .option=${option}></wk-option-select>`
+          html`
+            <wk-option-select
+              id=${`${this.wishlistItem.id}-${option.name}`}
+              .option=${option}
+            ></wk-option-select>
+          `
       )}
     `;
   }
@@ -376,7 +378,7 @@ export class WishlistProductCard extends WishlistElement {
 
     return html`
       <remove-button
-        data-wishlist-item-id=${this.state.wishlistItem.id}
+        data-wishlist-item-id=${this.wishlistItem.id}
         layout="icon-only"
         .floating=${floatSettings}
       ></remove-button>
@@ -427,12 +429,12 @@ export class WishlistButton extends WishlistElement {
   appReadyCallback() {
     this.app.events.subscribe("wk:product:change-variant:success", (event) => {
       if (this.dataset.productHandle === event.data.productHandle) {
-        const wishlistItemId = this.state.productInfo
-          ? this.state.productInfo.wishlistItemId
+        const wishlistItemId = this.productInfo
+          ? this.productInfo.wishlistItemId
           : undefined;
 
-        const currentVariantId = this.state.productInfo
-          ? this.state.productInfo.variantId
+        const currentVariantId = this.productInfo
+          ? this.productInfo.variantId
           : undefined;
 
         if (wishlistItemId && !currentVariantId) {
@@ -450,19 +452,19 @@ export class WishlistButton extends WishlistElement {
   }
 
   handleClick() {
-    if (this.state.productInfo.inWishlist) {
-      return this.app.removeWishlistItem(this.state.productInfo);
+    if (this.productInfo.inWishlist) {
+      return this.app.removeWishlistItem(this.productInfo);
     } else {
-      return this.app.addWishlistItem(this.state.productInfo);
+      return this.app.addWishlistItem(this.productInfo);
     }
   }
 
   render() {
-    if (!this.state.productInfo) {
+    if (!this.productInfo) {
       return;
     }
 
-    const inWishlist = this.state.productInfo.inWishlist;
+    const inWishlist = this.productInfo.inWishlist;
     const text = this.getTranslation(
       inWishlist
         ? "wishlist_buttons.product_in_wishlist"
@@ -516,8 +518,8 @@ export class RemoveButton extends WishlistElement {
   }
 
   render() {
-    const text = this.getTranslation("wishlist_buttons.remove_product");
-    const hint = this.getTranslation("wishlist_buttons.remove_product");
+    const text = this.getTranslation("wishlist_page.remove_product");
+    const hint = this.getTranslation("wishlist_page.remove_product");
 
     return html`
       <wk-button
@@ -566,7 +568,7 @@ export class WishlistLink extends WishlistElement {
   }
 
   render() {
-    const numItems = this.state.wishlist ? this.state.wishlist.numItems : 0;
+    const numItems = this.wishlist ? this.wishlist.numItems : 0;
     const wishlistUrl = this.getWishlistUrl();
     const text = this.getTranslation("wishlist_buttons.wishlist");
     const hint = this.getTranslation("wishlist_buttons.view_wishlist");
@@ -620,7 +622,7 @@ export class WishlistShare extends WishlistElement {
 
   async handleClick() {
     const { clipboard } = await this.app.shareWishlist({
-      wishlistId: this.state.wishlist.publicId,
+      wishlistId: this.wishlist.publicId,
       title: this.getTranslation("wishlist_share.share_title"),
       text: this.getTranslation("wishlist_share.share_message"),
     });
@@ -677,7 +679,7 @@ export class WishlistBuyAll extends WishlistElement {
 
   async handleClick() {
     await this.app.addAllToCart({
-      wishlistId: this.state.wishlist.id,
+      wishlistId: this.wishlist.id,
     });
   }
 
@@ -723,15 +725,14 @@ export class WishlistSaveForLater extends WishlistElement {
   }
 
   async handleClick() {
-    if (!this.state.productInfo.inWishlist) {
-      await this.app.addWishlistItem(this.state.productInfo);
+    if (!this.productInfo.inWishlist) {
+      await this.app.addWishlistItem(this.productInfo);
       this.closest(".cart-item").querySelector("cart-remove-button a").click();
     }
   }
 
   render() {
-    const inWishlist =
-      this.state.productInfo && this.state.productInfo.inWishlist;
+    const inWishlist = this.productInfo && this.productInfo.inWishlist;
 
     const text = this.getTranslation(
       inWishlist
