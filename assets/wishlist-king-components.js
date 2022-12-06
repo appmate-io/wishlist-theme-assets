@@ -426,31 +426,6 @@ export class WishlistButton extends WishlistElement {
     };
   }
 
-  appReadyCallback() {
-    this.app.events.subscribe("wk:product:change-variant:success", (event) => {
-      if (this.dataset.productHandle === event.data.productHandle) {
-        const wishlistItemId = this.productInfo
-          ? this.productInfo.wishlistItemId
-          : undefined;
-
-        const currentVariantId = this.productInfo
-          ? this.productInfo.variantId
-          : undefined;
-
-        if (wishlistItemId && !currentVariantId) {
-          this.app.updateWishlistItem({
-            wishlistItemId,
-            changes: {
-              variantId: event.data.variantId,
-            },
-          });
-        }
-
-        this.dataset.variantId = event.data.variantId;
-      }
-    });
-  }
-
   handleClick() {
     if (this.productInfo.inWishlist) {
       return this.app.removeWishlistItem(this.productInfo);
