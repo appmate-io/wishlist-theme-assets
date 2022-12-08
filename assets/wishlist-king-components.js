@@ -1,11 +1,11 @@
 import { html } from "https://cdn.jsdelivr.net/npm/lit-html@2.4.0/+esm";
 import { repeat } from "https://cdn.jsdelivr.net/npm/lit-html@2.4.0/directives/repeat.js";
-import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.1/wishlist-element.js";
-import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.1/controllers.js";
-import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.1/components/icon.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.1/components/button.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.1/components/badge.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.1/components/option-select.js";
+import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.2/wishlist-element.js";
+import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.2/controllers.js";
+import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.2/components/icon.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.2/components/button.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.2/components/badge.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.2/components/option-select.js";
 
 export class WishlistPage extends WishlistElement {
   getStateConfig() {
@@ -25,12 +25,10 @@ export class WishlistPage extends WishlistElement {
           <h1 class="wk-title">
             ${this.getTranslation("wishlist_page.title")}
           </h1>
+          ${this.renderWishlistEmptyCallout()} ${this.renderLoginCallout()}
           ${this.renderControls()}
         </div>
-        <div class="wk-body">
-          ${this.renderWishlistEmptyCallout()}${this.renderLoginCallout()}
-          ${this.renderWishlistItems()}
-        </div>
+        <div class="wk-body">${this.renderWishlistItems()}</div>
       </section>
     `;
   }
@@ -228,7 +226,7 @@ export class WishlistProductCard extends WishlistElement {
 
       return html`
         <span class="wk-current-price ${sale ? "wk-sale" : ""}">
-          ${this.formatMoney(variant.price)}
+          ${this.renderMoney(variant.price)}
         </span>
       `;
     }
@@ -245,7 +243,7 @@ export class WishlistProductCard extends WishlistElement {
 
     return html`
       <span class="wk-current-price">
-        ${this.formatMoney(product.price_min)}
+        ${this.renderMoney(product.price_min)}
       </span>
     `;
   }
@@ -254,7 +252,7 @@ export class WishlistProductCard extends WishlistElement {
     if (variant && variant.price < variant.compare_at_price) {
       return html`
         <span class="wk-compare-price">
-          ${this.formatMoney(variant.compare_at_price)}
+          ${this.renderMoney(variant.compare_at_price)}
         </span>
       `;
     }
@@ -742,18 +740,18 @@ customElements.define("wishlist-save-for-later", WishlistSaveForLater);
 
 Icon.addIcons({
   wishlist: `
-    <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 64 64">
+    <svg viewBox="0 0 64 64">
       <path d="M32.012,59.616c-1.119-.521-2.365-1.141-3.707-1.859a79.264,79.264,0,0,1-11.694-7.614C6.316,42,.266,32.6.254,22.076,0.244,12.358,7.871,4.506,17.232,4.5a16.661,16.661,0,0,1,11.891,4.99l2.837,2.889,2.827-2.9a16.639,16.639,0,0,1,11.874-5.02h0c9.368-.01,17.008,7.815,17.021,17.539,0.015,10.533-6.022,19.96-16.312,28.128a79.314,79.314,0,0,1-11.661,7.63C34.369,58.472,33.127,59.094,32.012,59.616Z"/>
     </svg>
   `,
   remove: `
-    <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 64 64">
+    <svg viewBox="0 0 64 64">
       <path d="M0.309,0.309a0.9,0.9,0,0,1,1.268,0L63.691,62.423a0.9,0.9,0,0,1-1.268,1.268L0.309,1.577A0.9,0.9,0,0,1,.309.309Z"/>
       <path d="M63.691,0.309a0.9,0.9,0,0,1,0,1.268L1.577,63.691A0.9,0.9,0,0,1,.309,62.423L62.423,0.309A0.9,0.9,0,0,1,63.691.309Z"/>
     </svg>
   `,
   share: `
-    <svg width="24px" height="24px" viewBox="0 0 24 24">
+    <svg viewBox="0 0 24 24">
       <path d="M20 13v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6M12 15V3m0 0L8.5 6.5M12 3l3.5 3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
     </svg>
   `,
@@ -763,7 +761,7 @@ Icon.addIcons({
     </svg>
   `,
   spinner: `
-    <svg class="wk-spinner-svg" aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 66 66">
+    <svg class="wk-spinner-svg" viewBox="0 0 66 66">
       <circle class="wk-spinner-circle" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
     </svg>
   `,
