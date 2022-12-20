@@ -26,27 +26,27 @@ const initComponents = ({ theme, routes }) => {
   // Header link
   theme.watch(
     {
-      selector: `.header__icons .header__icon--cart`,
+      selector: ".Header__Icon.Search-icon",
     },
     (target) => {
-      target.insertBefore(
+      target.insertAfter(
         theme.createComponent("wishlist-link", {
           props: {
             layout: "icon-only",
             alignment: "center",
-            badgeLayout: "pill-and-text",
-            badgeParentheses: false,
-            badgeHiddenIfEmpty: true,
-            badgeFloating: {
-              position: {
-                placement: "bottom-end",
-                inset: true,
-              },
-              offset: {
-                mainAxis: 8,
-                alignmentAxis: 0,
-              },
-            },
+            // badgeLayout: "pill-and-text",
+            // badgeParentheses: false,
+            // badgeHiddenIfEmpty: true,
+            // badgeFloating: {
+            //   position: {
+            //     placement: "bottom-end",
+            //     inset: true,
+            //   },
+            //   offset: {
+            //     mainAxis: 8,
+            //     alignmentAxis: 0,
+            //   },
+            // },
           },
         })
       );
@@ -56,7 +56,7 @@ const initComponents = ({ theme, routes }) => {
   // Grid items
   theme.watch(
     {
-      selector: `.card__information a[href*="/products/"]`,
+      selector: `.ProductItem__ImageWrapper[href*="/products/"]`,
       pageType: ["home", "product", "collection"],
     },
     (target) => {
@@ -70,7 +70,7 @@ const initComponents = ({ theme, routes }) => {
             layout: "icon-only",
             alignment: "center",
             floating: {
-              reference: target.closest(".card--media"),
+              reference: target,
               position: {
                 placement: "top-end",
                 inset: true,
@@ -86,11 +86,11 @@ const initComponents = ({ theme, routes }) => {
   // Product page
   theme.watch(
     {
-      selector: `.product-form__buttons`,
+      selector: `.ProductMeta__Description`,
       pageType: ["product"],
     },
     (target) => {
-      target.append(
+      target.insertBefore(
         theme.createComponent("wishlist-button", {
           dataset: {
             productHandle: theme.getProductHandle(document.location.href),

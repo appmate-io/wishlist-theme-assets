@@ -26,27 +26,14 @@ const initComponents = ({ theme, routes }) => {
   // Header link
   theme.watch(
     {
-      selector: `.header__icons .header__icon--cart`,
+      selector: ".logo-area__right .cart-link",
     },
     (target) => {
       target.insertBefore(
         theme.createComponent("wishlist-link", {
           props: {
-            layout: "icon-only",
+            layout: "icon-text",
             alignment: "center",
-            badgeLayout: "pill-and-text",
-            badgeParentheses: false,
-            badgeHiddenIfEmpty: true,
-            badgeFloating: {
-              position: {
-                placement: "bottom-end",
-                inset: true,
-              },
-              offset: {
-                mainAxis: 8,
-                alignmentAxis: 0,
-              },
-            },
           },
         })
       );
@@ -56,7 +43,7 @@ const initComponents = ({ theme, routes }) => {
   // Grid items
   theme.watch(
     {
-      selector: `.card__information a[href*="/products/"]`,
+      selector: `.image-cont > .product-link[href*="/products/"]`,
       pageType: ["home", "product", "collection"],
     },
     (target) => {
@@ -70,7 +57,7 @@ const initComponents = ({ theme, routes }) => {
             layout: "icon-only",
             alignment: "center",
             floating: {
-              reference: target.closest(".card--media"),
+              reference: target,
               position: {
                 placement: "top-end",
                 inset: true,
@@ -86,7 +73,7 @@ const initComponents = ({ theme, routes }) => {
   // Product page
   theme.watch(
     {
-      selector: `.product-form__buttons`,
+      selector: `.quantity-submit-row`,
       pageType: ["product"],
     },
     (target) => {

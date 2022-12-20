@@ -1,11 +1,11 @@
 import { html } from "https://cdn.jsdelivr.net/npm/lit-html@2.4.0/+esm";
 import { repeat } from "https://cdn.jsdelivr.net/npm/lit-html@2.4.0/directives/repeat.js";
-import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.2/wishlist-element.js";
-import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.2/controllers.js";
-import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.2/components/icon.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.2/components/button.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.2/components/badge.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.2/components/option-select.js";
+import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.5/wishlist-element.js";
+import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.5/controllers.js";
+import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.5/components/icon.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.5/components/button.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.5/components/badge.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.5/components/option-select.js";
 
 export class WishlistPage extends WishlistElement {
   getStateConfig() {
