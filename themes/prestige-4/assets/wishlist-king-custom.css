@@ -1,6 +1,7 @@
 wishlist-link .wk-button {
-  --icon-size: 18px;
+  --icon-size: 17px;
   --icon-stroke: black;
+  --icon-stroke-width: 1px;
 
   padding: 8px 12px;
 }
@@ -9,9 +10,12 @@ wishlist-link .wk-icon {
   top: 1px;
 }
 
-@media screen and (min-width: 1008px) {
+@media screen and (min-width: 641px) {
   wishlist-link .wk-button {
     --icon-size: 20px;
+    --icon-stroke-width: 2px;
+    
+    margin: 0 10px 0 0;
   }
 }
 
@@ -52,6 +56,7 @@ wishlist-product-card .wk-price {
 }
 
 wishlist-page .wk-page {
+  margin-top: 1em;
   margin-bottom: 3em;
 }
 
@@ -80,4 +85,8 @@ wishlist-page .wk-grid {
   wishlist-page .wk-grid {
     --columns: 4;
   } 
+}
+
+wishlist-buy-all {
+  display: none;
 }

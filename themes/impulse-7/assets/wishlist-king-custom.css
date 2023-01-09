@@ -92,3 +92,7 @@ wishlist-page .wk-grid {
     --columns: 4;
   } 
 }
+
+wishlist-buy-all {
+  display: none;
+}

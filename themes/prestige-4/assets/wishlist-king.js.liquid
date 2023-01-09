@@ -26,27 +26,14 @@ const initComponents = ({ theme, routes }) => {
   // Header link
   theme.watch(
     {
-      selector: ".Header__Icon.Search-icon",
+      selector: `.Header__Icon[data-action="open-drawer"]:not(.hidden-desk)`,
     },
     (target) => {
-      target.insertAfter(
+      target.insertBefore(
         theme.createComponent("wishlist-link", {
           props: {
             layout: "icon-only",
             alignment: "center",
-            // badgeLayout: "pill-and-text",
-            // badgeParentheses: false,
-            // badgeHiddenIfEmpty: true,
-            // badgeFloating: {
-            //   position: {
-            //     placement: "bottom-end",
-            //     inset: true,
-            //   },
-            //   offset: {
-            //     mainAxis: 8,
-            //     alignmentAxis: 0,
-            //   },
-            // },
           },
         })
       );

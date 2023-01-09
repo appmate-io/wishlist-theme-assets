@@ -87,11 +87,11 @@ const initComponents = ({ theme, routes }) => {
   // Product page
   theme.watch(
     {
-      selector: `form[action="${routes.cartAddUrl}"] button[type="submit"]`,
+      selector: `.product-single__form`,
       pageType: ["product"],
     },
     (target) => {
-      target.insertAfter(
+      target.append(
         theme.createComponent("wishlist-button", {
           dataset: {
             productHandle: theme.getProductHandle(document.location.href),
@@ -127,14 +127,14 @@ const initComponents = ({ theme, routes }) => {
 
 const initEvents = (app) => {
   app.events.subscribe("wk:wishlist:add-to-cart:success", (event) => {
-    // window.location.href = app.routes.cartUrl;
-    document.dispatchEvent(
-      new CustomEvent("ajaxProduct:added", {
-        detail: {
-          product: event.data.product,
-        },
-      })
-    );
+    window.location.href = app.routes.cartUrl;
+    // document.dispatchEvent(
+    //   new CustomEvent("ajaxProduct:added", {
+    //     detail: {
+    //       product: event.data.product,
+    //     },
+    //   })
+    // );
   });
   app.events.subscribe("wk:wishlist:add-all-to-cart:success", (event) => {
     window.location.href = app.routes.cartUrl;

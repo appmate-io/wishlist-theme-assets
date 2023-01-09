@@ -32,7 +32,7 @@ const initComponents = ({ theme, routes }) => {
       target.insertBefore(
         theme.createComponent("wishlist-link", {
           props: {
-            layout: "icon-text",
+            layout: "icon-only",
             alignment: "center",
           },
         })
@@ -59,7 +59,7 @@ const initComponents = ({ theme, routes }) => {
             floating: {
               reference: target,
               position: {
-                placement: "top-end",
+                placement: "top-start",
                 inset: true,
               },
               offset: 0,
@@ -73,7 +73,7 @@ const initComponents = ({ theme, routes }) => {
   // Product page
   theme.watch(
     {
-      selector: `.quantity-submit-row`,
+      selector: `.buy-buttons-row`,
       pageType: ["product"],
     },
     (target) => {
@@ -85,7 +85,7 @@ const initComponents = ({ theme, routes }) => {
           },
           props: {
             layout: "icon-and-text",
-            alignment: "center",
+            alignment: "left",
             fullWidth: true,
             outline: false,
           },
