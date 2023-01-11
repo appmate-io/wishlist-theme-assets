@@ -1,10 +1,13 @@
-import { html,repeat } from "https://cdn.jsdelivr.net/gh/lit/dist@2.6.0/all/lit-all.min.js";
-import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.0/wishlist-element.js";
-import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.0/controllers.js";
-import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.0/components/icon.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.0/components/button.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.0/components/badge.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.0/components/option-select.js";
+import {
+  html,
+  repeat,
+} from "https://cdn.jsdelivr.net/gh/lit/dist@2.6.0/all/lit-all.min.js";
+import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.1/wishlist-element.js";
+import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.1/controllers.js";
+import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.1/components/icon.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.1/components/button.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.1/components/badge.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.1/components/option-select.js";
 
 export class WishlistPage extends WishlistElement {
   getStateConfig() {
