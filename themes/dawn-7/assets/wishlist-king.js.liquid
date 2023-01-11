@@ -1,4 +1,4 @@
-import { WishlistApp } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.5/wishlist-app.js";
+import { WishlistApp } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.0/wishlist-app.js";
 
 export const createApp = ({ settings, config, locale }) => {
   if (window.WishlistKing) {
@@ -10,7 +10,7 @@ export const createApp = ({ settings, config, locale }) => {
     settings,
     locale,
     dependencies: [
-      "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.5/components/wishlist.css",
+      "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.0/components/wishlist.css",
       "{{ 'wishlist-king-custom.css' | asset_url }}",
       "{{ 'wishlist-king-components.js' | asset_url }}",
     ],
@@ -107,6 +107,28 @@ const initComponents = ({ theme, routes }) => {
     }
   );
 
+  // Save for later
+  theme.watch(
+    {
+      selector: `.cart-item__details .cart-item__name[href*="/products/"]`,
+      pageType: ["cart"],
+    },
+    (target) => {
+      target.closest(".cart-item__details").append(
+        theme.createComponent("wishlist-save-for-later", {
+          dataset: {
+            productHandle: theme.getProductHandle(target.element.href),
+            variantId: theme.getVariantId(target.element.href),
+          },
+          props: {
+            layout: "icon-and-text",
+            alignment: "center",
+          },
+        })
+      );
+    }
+  );
+
   // Wishlist page
   theme.watch(
     {
@@ -130,6 +152,12 @@ const initEvents = (app) => {
   });
   app.events.subscribe("wk:wishlist:add-all-to-cart:success", (event) => {
     window.location.href = app.routes.cartUrl;
+  });
+  app.events.subscribe("wk:cart:save-for-later:success", (event) => {
+    event.data.trigger
+      .closest(".cart-item")
+      .querySelector("cart-remove-button a")
+      .click();
   });
   app.events.subscribe("wk:wishlist:login-required", (event) => {
     const ignoreActions = ["wishlist:private:load"];

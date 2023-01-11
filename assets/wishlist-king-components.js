@@ -1,11 +1,10 @@
-import { html } from "https://cdn.jsdelivr.net/npm/lit-html@2.4.0/+esm";
-import { repeat } from "https://cdn.jsdelivr.net/npm/lit-html@2.4.0/directives/repeat.js";
-import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.5/wishlist-element.js";
-import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.5/controllers.js";
-import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.5/components/icon.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.5/components/button.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.5/components/badge.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.18.5/components/option-select.js";
+import { html,repeat } from "https://cdn.jsdelivr.net/gh/lit/dist@2.6.0/all/lit-all.min.js";
+import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.0/wishlist-element.js";
+import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.0/controllers.js";
+import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.0/components/icon.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.0/components/button.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.0/components/badge.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.0/components/option-select.js";
 
 export class WishlistPage extends WishlistElement {
   getStateConfig() {
@@ -699,8 +698,20 @@ export class WishlistSaveForLater extends WishlistElement {
 
   async handleClick() {
     if (!this.productInfo.inWishlist) {
-      await this.app.addWishlistItem(this.productInfo);
-      this.closest(".cart-item").querySelector("cart-remove-button a").click();
+      await this.app
+        .addWishlistItem(this.productInfo)
+        .then(() => {
+          this.app.events.publish({
+            name: "wk:cart:save-for-later:success",
+            data: { trigger: this },
+          });
+        })
+        .catch(() => {
+          this.app.events.publish({
+            name: "wk:cart:save-for-later:error",
+            data: { trigger: this },
+          });
+        });
     }
   }
 
