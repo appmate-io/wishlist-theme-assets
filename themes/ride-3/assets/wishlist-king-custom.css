@@ -1,7 +1,7 @@
 wishlist-link .wk-button {
-  --icon-size: 20px;
+  --icon-size: 22px;
   --icon-stroke: rgb(var(--color-foreground));
-  --icon-stroke-width: 1px;
+  --icon-stroke-width: 1.25px;
 
   height: 4.4rem;
   width: 4.4rem;
@@ -12,8 +12,8 @@ wishlist-link .wk-selected {
   --icon-fill: transparent;
 }
 
-wishlist-link .wk-button .wk-pill {
-  --size: 17px;
+wishlist-link .wk-pill {
+  --badge-size: 1.7rem;
 
   font-size: 0.9rem;
   color: rgb(var(--color-button-text));

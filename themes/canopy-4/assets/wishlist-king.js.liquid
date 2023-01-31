@@ -1,4 +1,4 @@
-import { WishlistApp } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.2/wishlist-app.js";
+import { WishlistApp } from "https://wishlist-king-sdk.eu.ngrok.io/npm/@appmate/wishlist@4.19.2/wishlist-app.js";
 
 export const createApp = ({ settings, config, locale }) => {
   if (window.WishlistKing) {
@@ -10,7 +10,7 @@ export const createApp = ({ settings, config, locale }) => {
     settings,
     locale,
     dependencies: [
-      "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.2/components/wishlist.css",
+      "https://wishlist-king-sdk.eu.ngrok.io/npm/@appmate/wishlist@4.19.2/components/wishlist.css",
       "{{ 'wishlist-king-custom.css' | asset_url }}",
       "{{ 'wishlist-king-components.js' | asset_url }}",
     ],
@@ -26,7 +26,7 @@ const initComponents = ({ theme, routes }) => {
   // Header link
   theme.watch(
     {
-      selector: ".xxx-header-cart-link-xxx",
+      selector: ".toolbar-cart",
     },
     (target) => {
       target.insertBefore(
@@ -39,7 +39,7 @@ const initComponents = ({ theme, routes }) => {
             badgeHiddenIfEmpty: true,
             badgeFloating: {
               position: {
-                placement: "bottom-end",
+                placement: "top-end",
                 inset: true,
               },
               offset: 0,
@@ -53,7 +53,7 @@ const initComponents = ({ theme, routes }) => {
   // Grid items
   theme.watch(
     {
-      selector: `.xxx-grid-item-link-xxx[href*="/products/"]`,
+      selector: `.image .inner a[href*="/products/"]:not([href^="//cdn"])`,
       pageType: ["home", "product", "collection"],
     },
     (target) => {
@@ -83,7 +83,7 @@ const initComponents = ({ theme, routes }) => {
   // Product page
   theme.watch(
     {
-      selector: `.xxx-product-form-xxx[action="${routes.cartAddUrl}"]`,
+      selector: `.product-purchase-form[action="${routes.cartAddUrl}"]`,
       pageType: ["product"],
     },
     (target) => {
@@ -95,7 +95,7 @@ const initComponents = ({ theme, routes }) => {
           },
           props: {
             layout: "icon-and-text",
-            alignment: "center",
+            alignment: "left",
             fullWidth: true,
             outline: false,
           },

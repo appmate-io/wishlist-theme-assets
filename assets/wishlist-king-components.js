@@ -1,13 +1,10 @@
-import {
-  html,
-  repeat,
-} from "https://cdn.jsdelivr.net/gh/lit/dist@2.6.0/all/lit-all.min.js";
-import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.1/wishlist-element.js";
-import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.1/controllers.js";
-import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.1/components/icon.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.1/components/button.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.1/components/badge.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.1/components/option-select.js";
+import { html, repeat } from "https://cdn.jsdelivr.net/gh/lit/dist@2.6.0/all/lit-all.min.js";
+import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.2/wishlist-element.js";
+import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.2/controllers.js";
+import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.2/components/icon.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.2/components/button.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.2/components/badge.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.2/components/option-select.js";
 
 export class WishlistPage extends WishlistElement {
   getStateConfig() {
@@ -215,6 +212,7 @@ export class WishlistProductCard extends WishlistElement {
             ${this.renderCurrentPrice({ product, variant })}
             ${this.renderComparePrice({ product, variant })}
           </div>
+          ${this.renderUnitPrice({ product, variant })}
         </div>
         ${this.renderProductForm({ variant })} ${this.renderRemoveButton()}
         ${this.renderWishlistButton()}
@@ -258,6 +256,33 @@ export class WishlistProductCard extends WishlistElement {
         </span>
       `;
     }
+  }
+
+  renderUnitPrice({ variant }) {
+    if (!variant) {
+      return;
+    }
+
+    const unitPrice = variant.unit_price_measurement;
+
+    if (!unitPrice) {
+      return;
+    }
+
+    const baseUnit =
+      unitPrice.reference_value != 1
+        ? unitPrice.reference_value
+        : unitPrice.reference_unit;
+
+    return html`
+      <div class="wk-unit-price">
+        <span class="wk-unit-price-money"
+          >${this.renderMoney(variant.unit_price)}</span
+        >
+        <span class="wk-unit-price-separator"> / </span>
+        <span class="wk-unit-price-unit">${baseUnit}</span>
+      </div>
+    `;
   }
 
   renderProductForm({ variant }) {

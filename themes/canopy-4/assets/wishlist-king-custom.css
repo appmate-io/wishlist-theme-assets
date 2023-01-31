@@ -1,25 +1,20 @@
 wishlist-link .wk-button {
   --icon-size: 18px;
-  --icon-stroke-width: 1.75px;
   --icon-stroke: black;
+  --icon-stroke-width: 2px;
+  --icon-fill: transparent;
 
-  flex-direction: row-reverse;
-  margin-right: 20px;
-  gap: 8px;
+  margin: 0 10px 0 5px;
 }
 
-@media only screen and (max-width: 767px) {
-  wishlist-link .wk-button {
-    justify-content: flex-start;
-    height: 44px;
-    width: 36px;
-    margin: 0;
-    padding-right: 5px;
-  }
+wishlist-link .wk-button .wk-pill {
+  --size: 16px;
 
-  wishlist-link .wk-text {
-    display: none;
-  }
+  top: -6px;
+  background: #deced3;
+  color: #616161;
+  font-size: 11px;
+  font-weight: 700;
 }
 
 wishlist-button .wk-floating {
@@ -30,12 +25,18 @@ wishlist-button .wk-button,
 wishlist-button .wk-floating .wk-button {
   --icon-size: 18px;
   --icon-stroke: black;
-  margin-bottom: 1em;
 }
 
-.wk-icon svg,
-.wk-icon svg:not(:root):not(:root) {
-  fill: var(--icon-fill);
+wishlist-button wk-button:not(.wk-floating) .wk-button:hover {
+  color: inherit;
+}
+
+wishlist-button .wk-floating .wk-button {
+}
+
+wishlist-save-for-later .wk-button {
+  --icon-size: 14px;
+  --icon-stroke: black;
 }
 
 wishlist-product-card .wk-image {
@@ -46,6 +47,8 @@ wishlist-product-card .wk-submit-button {
 }
 
 wishlist-product-card .wk-meta {
+  color: #616161;
+  text-align: center;
 }
 
 wishlist-product-card .wk-product-title {
@@ -55,10 +58,27 @@ wishlist-product-card .wk-vendor {
 }
 
 wishlist-product-card .wk-price {
+  margin-top: 1em;
+  color: #616161;
+  font-size: 1.25em;
+  justify-content: center;
+}
+
+wishlist-product-card .wk-unit-price {
+  font-size: 80%;
+}
+
+wishlist-product-card .wk-unit-price-money::before {
+  content: "(";
+}
+
+wishlist-product-card .wk-unit-price-unit::after {
+  content: ")";
 }
 
 wishlist-page .wk-page {
-  margin-bottom: 2em;
+  margin-top: 4.5em;
+  margin-bottom: 4.5em;
 }
 
 wishlist-page .wk-title {

@@ -1,11 +1,10 @@
 wishlist-link .wk-button {
-  --icon-size: 20px;
-  --icon-stroke: rgb(var(--color-foreground));
-  --icon-stroke-width: 1px;
+  --icon-size: 24px;
+  --icon-stroke: #1f1a19;
+  --icon-stroke-width: 1.75px;
 
-  height: 4.4rem;
-  width: 4.4rem;
-  color: rgb(var(--color-foreground));
+  height: 100%;
+  padding: 10px;
 }
 
 wishlist-link .wk-selected {
@@ -13,35 +12,35 @@ wishlist-link .wk-selected {
 }
 
 wishlist-link .wk-button .wk-pill {
-  --size: 17px;
+  --size: 22px;
 
-  font-size: 0.9rem;
-  color: rgb(var(--color-button-text));
-  background-color: rgb(var(--color-button));
+  bottom: 2px;
+  left: 5px;
+  border: 2px solid white;
+}
+
+wishlist-button .wk-floating {
+  z-index: 1;
 }
 
 wishlist-button .wk-button,
 wishlist-button .wk-floating .wk-button {
-  --icon-stroke: rgba(var(--color-button), var(--alpha-button-background));
-
-  color: rgba(var(--color-button), var(--alpha-button-background));
+  --icon-size: 18px;
+  --icon-stroke: black;
 }
 
 wishlist-button .wk-button {
-  font-size: 1.5rem;
-  letter-spacing: 0.1rem;
-  font-weight: 400;
-  font-family: inherit;
+  min-height: 46px;
+  color: black;
+  margin-top: 1em;
+  padding: 0;
 }
 
 wishlist-page .wk-page {
-  padding-bottom: 27px;
+  padding: 2em 1em;
 }
 
-@media screen and (min-width: 750px) {
-  wishlist-page .wk-page {
-    padding-bottom: 36px;
-  }
+wishlist-page .wk-title {
 }
 
 wishlist-product-card .wk-image {
@@ -49,18 +48,27 @@ wishlist-product-card .wk-image {
 }
 
 wishlist-product-card .wk-submit-button {
+  font-family: inherit;
+  border-radius: 3px;
 }
 
 wishlist-product-card .wk-meta {
 }
 
 wishlist-product-card .wk-product-title {
+  text-align: center;
+  margin-bottom: 4px;
 }
 
 wishlist-product-card .wk-vendor {
 }
 
 wishlist-product-card .wk-price {
+  font-size: 14px;
+  justify-content: center;
+}
+
+wishlist-product-card .wk-current-price.wk-sale {
 }
 
 wishlist-page .wk-grid {
@@ -87,10 +95,4 @@ wishlist-page .wk-grid {
 
 wishlist-buy-all {
   display: none;
-}
-
-wishlist-save-for-later .wk-button {
-  --icon-stroke: rgba(var(--color-button), var(--alpha-button-background));
-
-  color: rgba(var(--color-button), var(--alpha-button-background));
 }

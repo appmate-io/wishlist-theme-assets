@@ -26,24 +26,39 @@ const initComponents = ({ theme, routes }) => {
   // Header link
   theme.watch(
     {
-      selector: ".xxx-header-cart-link-xxx",
+      selector: ".top-bar--right-menu .top-bar__menu",
     },
     (target) => {
-      target.insertBefore(
+      target.append(
+        theme.createComponent("wishlist-link", {
+          wrap: {
+            name: "li",
+          },
+          props: {
+            layout: "icon-only",
+            alignment: "center",
+            badgeLayout: "text",
+            badgeParentheses: false,
+            badgeHiddenIfEmpty: false,
+          },
+        })
+      );
+    }
+  );
+
+  theme.watch(
+    {
+      selector: ".top-bar--right .icon-search",
+    },
+    (target) => {
+      target.insertAfter(
         theme.createComponent("wishlist-link", {
           props: {
             layout: "icon-only",
             alignment: "center",
-            badgeLayout: "pill-and-text",
+            badgeLayout: "text",
             badgeParentheses: false,
-            badgeHiddenIfEmpty: true,
-            badgeFloating: {
-              position: {
-                placement: "bottom-end",
-                inset: true,
-              },
-              offset: 0,
-            },
+            badgeHiddenIfEmpty: false,
           },
         })
       );
@@ -53,7 +68,7 @@ const initComponents = ({ theme, routes }) => {
   // Grid items
   theme.watch(
     {
-      selector: `.xxx-grid-item-link-xxx[href*="/products/"]`,
+      selector: `.product_image > a[href*="/products/"]`,
       pageType: ["home", "product", "collection"],
     },
     (target) => {
@@ -69,7 +84,7 @@ const initComponents = ({ theme, routes }) => {
             floating: {
               reference: target,
               position: {
-                placement: "top-end",
+                placement: "bottom-end",
                 inset: true,
               },
               offset: 0,
@@ -83,11 +98,11 @@ const initComponents = ({ theme, routes }) => {
   // Product page
   theme.watch(
     {
-      selector: `.xxx-product-form-xxx[action="${routes.cartAddUrl}"]`,
+      selector: `.purchase-details`,
       pageType: ["product"],
     },
     (target) => {
-      target.append(
+      target.insertAfter(
         theme.createComponent("wishlist-button", {
           dataset: {
             productHandle: theme.getProductHandle(document.location.href),

@@ -26,11 +26,17 @@ const initComponents = ({ theme, routes }) => {
   // Header link
   theme.watch(
     {
-      selector: ".xxx-header-cart-link-xxx",
+      selector: ".site-header-actions",
     },
     (target) => {
-      target.insertBefore(
+      target.append(
         theme.createComponent("wishlist-link", {
+          wrap: {
+            name: "li",
+            props: {
+              className: "site-header-actions__account-link",
+            },
+          },
           props: {
             layout: "icon-only",
             alignment: "center",
@@ -39,7 +45,7 @@ const initComponents = ({ theme, routes }) => {
             badgeHiddenIfEmpty: true,
             badgeFloating: {
               position: {
-                placement: "bottom-end",
+                placement: "top-end",
                 inset: true,
               },
               offset: 0,
@@ -53,7 +59,7 @@ const initComponents = ({ theme, routes }) => {
   // Grid items
   theme.watch(
     {
-      selector: `.xxx-grid-item-link-xxx[href*="/products/"]`,
+      selector: `.productitem--image-link[href*="/products/"]`,
       pageType: ["home", "product", "collection"],
     },
     (target) => {
@@ -83,11 +89,11 @@ const initComponents = ({ theme, routes }) => {
   // Product page
   theme.watch(
     {
-      selector: `.xxx-product-form-xxx[action="${routes.cartAddUrl}"]`,
+      selector: `.product-form--atc`,
       pageType: ["product"],
     },
     (target) => {
-      target.append(
+      target.insertAfter(
         theme.createComponent("wishlist-button", {
           dataset: {
             productHandle: theme.getProductHandle(document.location.href),
@@ -95,31 +101,9 @@ const initComponents = ({ theme, routes }) => {
           },
           props: {
             layout: "icon-and-text",
-            alignment: "center",
+            alignment: "left",
             fullWidth: true,
             outline: false,
-          },
-        })
-      );
-    }
-  );
-
-  // Save for later
-  theme.watch(
-    {
-      selector: `.xxx-cart-item-details-xxx .xxx-cart-item-link-xxx[href*="/products/"]`,
-      pageType: ["cart"],
-    },
-    (target) => {
-      target.closest(".xxx-cart-item-details-xxx").append(
-        theme.createComponent("wishlist-save-for-later", {
-          dataset: {
-            productHandle: theme.getProductHandle(target.element.href),
-            variantId: theme.getVariantId(target.element.href),
-          },
-          props: {
-            layout: "icon-and-text",
-            alignment: "center",
           },
         })
       );
@@ -149,12 +133,6 @@ const initEvents = (app) => {
   });
   app.events.subscribe("wk:wishlist:add-all-to-cart:success", (event) => {
     window.location.href = app.routes.cartUrl;
-  });
-  app.events.subscribe("wk:cart:save-for-later:success", (event) => {
-    // event.data.trigger
-    //   .closest(".xxx-cart-item-xxx")
-    //   .querySelector("xxx-cart-remove-button-xxx")
-    //   .click();
   });
   app.events.subscribe("wk:wishlist:login-required", (event) => {
     const ignoreActions = ["wishlist:private:load"];

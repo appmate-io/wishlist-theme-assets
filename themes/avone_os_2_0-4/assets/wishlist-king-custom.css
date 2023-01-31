@@ -1,0 +1,125 @@
+wishlist-link .wk-button {
+  --icon-stroke: #030505;
+  --icon-size: 18px;
+  --icon-stroke-width: 1.2px;
+
+  height: 30px;
+  padding: 0 5px 0 0;
+}
+
+wishlist-link .wk-button.wk-selected {
+  --icon-fill: transparent;
+}
+
+wishlist-link .wk-pill {
+  --size: 16px;
+
+  background: #030505;
+  color: #fff;
+  font-size: 11px;
+  top: -2px;
+  left: 5px;
+}
+
+@media only screen and (min-width: 767px) {
+  wishlist-link .wk-button {
+    --icon-size: 22px;
+    --icon-stroke-width: 1.5px;
+
+    padding: 0 9px;
+  }
+
+  wishlist-link .wk-pill {
+    left: 0;
+  }
+}
+
+wishlist-button .wk-floating {
+  z-index: 1;
+}
+
+wishlist-button .wk-button,
+wishlist-button .wk-floating .wk-button {
+  --icon-size: 18px;
+  --icon-stroke: black;
+}
+
+wishlist-button wk-button:not(.wk-floating) .wk-button {
+}
+
+wishlist-button .wk-floating .wk-button {
+}
+
+wishlist-save-for-later .wk-button {
+  --icon-size: 14px;
+  --icon-stroke: black;
+}
+
+wishlist-product-card .wk-image {
+  aspect-ratio: 1 / 1;
+}
+
+wishlist-product-card .wk-submit-button {
+  min-height: 40px;
+  border: 1px solid #342295;
+  background-color: #342295;
+  color: #fff;
+  font-family: var(--ft1);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  user-select: none;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+}
+
+wishlist-product-card .wk-meta {
+}
+
+wishlist-product-card .wk-product-title {
+}
+
+wishlist-product-card .wk-vendor {
+}
+
+wishlist-product-card .wk-price {
+}
+
+wishlist-page .wk-page {
+  margin-top: 25px;
+}
+
+@media only screen and (min-width: 767px) {
+  wishlist-page .wk-page {
+    margin-top: 50px;
+  }
+}
+
+wishlist-page .wk-title {
+}
+
+wishlist-page .wk-grid {
+  --columns: 1;
+}
+
+@media (min-width: 400px) {
+  wishlist-page .wk-grid {
+    --columns: 2;
+  }
+}
+
+@media (min-width: 700px) {
+  wishlist-page .wk-grid {
+    --columns: 3;
+  }
+}
+
+@media (min-width: 900px) {
+  wishlist-page .wk-grid {
+    --columns: 4;
+  }
+}
+
+wishlist-buy-all {
+  display: none;
+}
