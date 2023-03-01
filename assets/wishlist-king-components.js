@@ -1,10 +1,12 @@
-import { html, repeat } from "https://cdn.jsdelivr.net/gh/lit/dist@2.6.0/all/lit-all.min.js";
-import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.2/wishlist-element.js";
-import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.2/controllers.js";
-import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.2/components/icon.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.2/components/button.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.2/components/badge.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.19.2/components/option-select.js";
+import {
+  html,
+  repeat,
+} from "https://cdn.jsdelivr.net/gh/lit/dist@2.6.0/all/lit-all.min.js";
+import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.4/wishlist-element.js";
+import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.4/controllers.js";
+import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.4/components/icon.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.4/components/button.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.4/components/option-select.js";
 
 export class WishlistPage extends WishlistElement {
   getStateConfig() {
@@ -132,8 +134,7 @@ export class WishlistProductCard extends WishlistElement {
       this.form.setProduct({
         product: this.wishlistItem.product,
         selectedVariantId: this.wishlistItem.variantId,
-        autoSelect:
-          this.app.settings.wishlistPage.variantAutoSelectMode === "ALWAYS",
+        autoSelect: false,
       });
     }
   }
@@ -150,7 +151,7 @@ export class WishlistProductCard extends WishlistElement {
       "change .wk-form": async (event) => {
         this.form.changeOption({
           input: event.target,
-          autoSelect: this.app.settings.autoSelectVariantOnChange,
+          autoSelect: false,
         });
 
         if (this.form.selectedVariant && this.isMine) {
@@ -431,11 +432,11 @@ customElements.define("wishlist-product-card", WishlistProductCard);
 export class WishlistButton extends WishlistElement {
   static get properties() {
     return {
-      layout: { type: String },
-      alignment: { type: String },
-      outline: { type: Boolean },
-      fullWidth: { type: Boolean },
-      floating: { type: Object },
+      layout: { type: String, reflect: true },
+      alignment: { type: String, reflect: true },
+      outline: { type: Boolean, reflect: true },
+      fullWidth: { type: Boolean, reflect: true },
+      floating: { type: Object, reflect: true },
     };
   }
 

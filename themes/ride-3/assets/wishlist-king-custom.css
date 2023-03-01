@@ -27,6 +27,12 @@ wishlist-button .wk-floating .wk-button {
   color: rgba(var(--color-button), var(--alpha-button-background));
 }
 
+wishlist-button wk-button:not(.wk-floating) .wk-button {
+}
+
+wishlist-button .wk-floating .wk-button {
+}
+
 wishlist-button .wk-button {
   font-size: 1.5rem;
   letter-spacing: 0.1rem;

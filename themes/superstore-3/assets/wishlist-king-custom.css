@@ -10,7 +10,7 @@ wishlist-link .wk-button {
 
 @media screen and (min-width: 720px) {
   wishlist-link .wk-button {
-    right: 114px;  
+    right: 114px;
   }
 }
 
@@ -27,7 +27,13 @@ wishlist-button .wk-floating {
 wishlist-button .wk-button,
 wishlist-button .wk-floating .wk-button {
   --icon-size: 18px;
-  --icon-stroke: black
+  --icon-stroke: black;
+}
+
+wishlist-button wk-button:not(.wk-floating) .wk-button {
+}
+
+wishlist-button .wk-floating .wk-button {
 }
 
 wishlist-page .wk-page {
@@ -48,7 +54,8 @@ wishlist-product-card .wk-image {
   aspect-ratio: 1 / 1;
 }
 
-wishlist-product-card .wk-submit-button {}
+wishlist-product-card .wk-submit-button {
+}
 
 wishlist-product-card .wk-meta {
   font-size: 14px;
@@ -56,27 +63,27 @@ wishlist-product-card .wk-meta {
 }
 
 wishlist-product-card .wk-price {
-  margin-top: .23438rem;
+  margin-top: 0.23438rem;
 }
 
 wishlist-page .wk-grid {
   --columns: 1;
-} 
+}
 
 @media (min-width: 400px) {
   wishlist-page .wk-grid {
     --columns: 2;
-  } 
+  }
 }
 
 @media (min-width: 700px) {
   wishlist-page .wk-grid {
     --columns: 3;
-  } 
+  }
 }
 
 @media (min-width: 900px) {
   wishlist-page .wk-grid {
     --columns: 4;
-  } 
+  }
 }

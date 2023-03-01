@@ -1,6 +1,6 @@
 wishlist-link .wk-button {
   --icon-size: 17px;
-  --icon-stroke: black;
+  --icon-stroke: var(--header-heading-color);
   --icon-stroke-width: 1px;
 
   padding: 8px 12px;
@@ -14,8 +14,8 @@ wishlist-link .wk-icon {
   wishlist-link .wk-button {
     --icon-size: 20px;
     --icon-stroke-width: 2px;
-    
-    margin: 0 10px 0 0;
+
+    margin: 0 10px;
   }
 }
 
@@ -29,13 +29,22 @@ wishlist-button .wk-floating .wk-button {
   --icon-stroke: black;
 }
 
+wishlist-button wk-button:not(.wk-floating) .wk-button {
+  margin-top: 1em;
+}
+
+wishlist-button .wk-floating .wk-button {
+}
+
 wishlist-product-card .wk-image {
   aspect-ratio: 1 / 1;
 }
 
-wishlist-product-card .wk-submit-button {}
+wishlist-product-card .wk-submit-button {
+}
 
-wishlist-product-card .wk-meta {}
+wishlist-product-card .wk-meta {
+}
 
 wishlist-product-card .wk-product-title {
   font-family: var(--heading-font-family);
@@ -45,7 +54,8 @@ wishlist-product-card .wk-product-title {
   text-transform: uppercase;
 }
 
-wishlist-product-card .wk-vendor {}
+wishlist-product-card .wk-vendor {
+}
 
 wishlist-product-card .wk-price {
   font-family: var(--heading-font-family);
@@ -72,19 +82,19 @@ wishlist-page .wk-grid {
 @media (min-width: 400px) {
   wishlist-page .wk-grid {
     --columns: 2;
-  } 
+  }
 }
 
 @media (min-width: 700px) {
   wishlist-page .wk-grid {
     --columns: 3;
-  } 
+  }
 }
 
 @media (min-width: 900px) {
   wishlist-page .wk-grid {
     --columns: 4;
-  } 
+  }
 }
 
 wishlist-buy-all {

@@ -13,6 +13,12 @@ wishlist-button .wk-floating .wk-button {
   --icon-stroke: black;
 }
 
+wishlist-button wk-button:not(.wk-floating) .wk-button {
+}
+
+wishlist-button .wk-floating .wk-button {
+}
+
 wishlist-product-card .wk-image {
   aspect-ratio: 1 / 1;
 }

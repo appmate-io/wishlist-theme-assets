@@ -38,6 +38,12 @@ wishlist-button .wk-floating .wk-button {
   --icon-stroke: black;
 }
 
+wishlist-button wk-button:not(.wk-floating) .wk-button {
+}
+
+wishlist-button .wk-floating .wk-button {
+}
+
 wishlist-page .wk-page {
   padding-top: 40px;
   padding-bottom: 40px;

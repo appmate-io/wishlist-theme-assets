@@ -29,6 +29,12 @@ wishlist-button .wk-floating .wk-button {
   --icon-stroke: black;
 }
 
+wishlist-button wk-button:not(.wk-floating) .wk-button {
+}
+
+wishlist-button .wk-floating .wk-button {
+}
+
 wishlist-button .wk-button {
   min-height: 46px;
   color: black;

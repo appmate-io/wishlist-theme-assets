@@ -32,11 +32,6 @@
       "link_copied": "Link copied",
       "share_title": "My Wishlist",
       "share_message": "Here is a link to my wishlist."
-    },
-    "wishlist_messages": {
-      "wishlist_add_success_html": "Product added to list",
-      "wishlist_remove_success_html": "Product removed from list",
-      "wishlist_add_to_cart_success_html": "Product added to cart"
     }
   }
 }

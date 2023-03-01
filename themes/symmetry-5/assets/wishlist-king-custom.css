@@ -30,7 +30,13 @@ wishlist-button .wk-button,
 wishlist-button .wk-floating .wk-button {
   --icon-size: 18px;
   --icon-stroke: black;
+}
+
+wishlist-button wk-button:not(.wk-floating) .wk-button {
   margin-bottom: 1em;
+}
+
+wishlist-button .wk-floating .wk-button {
 }
 
 .wk-icon svg,

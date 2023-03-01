@@ -1,0 +1,172 @@
+import { WishlistApp } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.4/wishlist-app.js";
+
+export const createApp = ({ settings, config, locale }) => {
+  if (window.WishlistKing) {
+    return;
+  }
+
+  const app = new WishlistApp({
+    config,
+    settings,
+    locale,
+    dependencies: [
+      "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.4/components/wishlist.css",
+      "{{ 'wishlist-king-custom.css' | asset_url }}",
+      "{{ 'wishlist-king-components.js' | asset_url }}",
+    ],
+  });
+
+  initEvents(app);
+  initComponents(app);
+
+  return app;
+};
+
+const initComponents = ({ theme, routes }) => {
+  // Header link
+  theme.watch(
+    {
+      selector: ".header__cart-links--cart",
+    },
+    (target) => {
+      target.insertBefore(
+        theme.createComponent("wishlist-link", {
+          wrap: {
+            name: "li",
+            props: {
+              className:
+                "header__cart-links--wishlist wishlist-link relative m0 p0",
+            },
+          },
+          props: {
+            layout: "icon-only",
+            alignment: "center",
+            // badgeLayout: "pill-and-text",
+            // badgeParentheses: false,
+            // badgeHiddenIfEmpty: true,
+            // badgeFloating: {
+            //   position: {
+            //     placement: "bottom-end",
+            //     inset: true,
+            //   },
+            //   offset: 0,
+            // },
+          },
+        })
+      );
+    }
+  );
+
+  // Grid items
+  theme.watch(
+    {
+      selector: `.product-loop__img-wrapper a[href*="/products/"]`,
+      pageType: ["home", "product", "collection"],
+    },
+    (target) => {
+      target.insertAfter(
+        theme.createComponent("wishlist-button", {
+          dataset: {
+            productHandle: theme.getProductHandle(target.element.href),
+            variantId: theme.getVariantId(target.element.href),
+          },
+          props: {
+            layout: "icon-only",
+            alignment: "center",
+            floating: {
+              reference: target,
+              position: {
+                placement: "bottom-end",
+                inset: true,
+              },
+              offset: 0,
+            },
+          },
+        })
+      );
+    }
+  );
+
+  // Product page
+  theme.watch(
+    {
+      selector: `.product__form-buttons`,
+      pageType: ["product"],
+    },
+    (target) => {
+      target.append(
+        theme.createComponent("wishlist-button", {
+          dataset: {
+            productHandle: theme.getProductHandle(document.location.href),
+            variantId: theme.getVariantId(document.location.href),
+          },
+          props: {
+            layout: "icon-and-text",
+            alignment: "left",
+            fullWidth: false,
+            outline: false,
+          },
+        })
+      );
+    }
+  );
+
+  // Save for later
+  theme.watch(
+    {
+      selector: `.xxx-cart-item-details-xxx .xxx-cart-item-link-xxx[href*="/products/"]`,
+      pageType: ["cart"],
+    },
+    (target) => {
+      target.closest(".xxx-cart-item-details-xxx").append(
+        theme.createComponent("wishlist-save-for-later", {
+          dataset: {
+            productHandle: theme.getProductHandle(target.element.href),
+            variantId: theme.getVariantId(target.element.href),
+          },
+          props: {
+            layout: "icon-and-text",
+            alignment: "center",
+          },
+        })
+      );
+    }
+  );
+
+  // Wishlist page
+  theme.watch(
+    {
+      selector: "#wishlist-page",
+    },
+    (target) => {
+      target.replace(
+        theme.createComponent("wishlist-page", {
+          dataset: {
+            wishlistId: theme.getWishlistId(window.location.pathname),
+          },
+        })
+      );
+    }
+  );
+};
+
+const initEvents = (app) => {
+  app.events.subscribe("wk:wishlist:add-to-cart:success", (event) => {
+    window.location.href = app.routes.cartUrl;
+  });
+  app.events.subscribe("wk:wishlist:add-all-to-cart:success", (event) => {
+    window.location.href = app.routes.cartUrl;
+  });
+  app.events.subscribe("wk:cart:save-for-later:success", (event) => {
+    // event.data.trigger
+    //   .closest(".xxx-cart-item-xxx")
+    //   .querySelector("xxx-cart-remove-button-xxx")
+    //   .click();
+  });
+  app.events.subscribe("wk:wishlist:login-required", (event) => {
+    const ignoreActions = ["wishlist:private:load"];
+    if (!ignoreActions.includes(event.data.action)) {
+      window.location.href = app.routes.accountLoginUrl;
+    }
+  });
+};
