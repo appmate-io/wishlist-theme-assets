@@ -46,7 +46,7 @@ wishlist-product-card .wk-price {
 wishlist-page .wk-page {
 }
 
-wishlist-page .wk-title {
+wishlist-page .wk-header .wk-title {
 }
 
 wishlist-page .wk-grid {
@@ -69,4 +69,13 @@ wishlist-page .wk-grid {
   wishlist-page .wk-grid {
     --columns: 4;
   }
+}
+
+wishlist-buy-all {
+  display: none;
+}
+
+wishlist-page .wk-login-callout,
+wishlist-page .wk-wishlist-empty-callout {
+  padding: 0;
 }

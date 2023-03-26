@@ -120,3 +120,12 @@ wishlist-page .wk-grid {
     --columns: 4;
   }
 }
+
+wishlist-page .wk-login-callout,
+wishlist-page .wk-wishlist-empty-callout {
+  padding: 0;
+}
+
+wishlist-buy-all {
+  display: none;
+}

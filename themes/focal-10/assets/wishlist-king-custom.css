@@ -1,0 +1,104 @@
+wishlist-link .wk-button {
+  --icon-size: 18px;
+  --icon-stroke: black;
+}
+
+wishlist-button .wk-floating {
+  z-index: 1;
+}
+
+wishlist-button .wk-button,
+wishlist-button .wk-floating .wk-button {
+  --icon-size: 18px;
+  --icon-stroke: black;
+}
+
+wishlist-button wk-button:not(.wk-floating) .wk-button {
+}
+
+wishlist-button .wk-floating .wk-button {
+}
+
+wishlist-product-card .wk-image {
+  aspect-ratio: 1 / 1;
+}
+
+wishlist-product-card .wk-submit-button {
+  background: rgb(var(--secondary-button-background));
+  color: rgb(var(--secondary-button-text-color));
+  /*   background: rgb(var(--primary-button-background));
+  color: rgb(var(--primary-button-text-color)); */
+  border-radius: var(--button-border-radius);
+  font-size: calc(var(--base-font-size) - 2px);
+  font-family: var(--text-font-family);
+  font-weight: var(--text-font-bold-weight);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+wishlist-product-card .wk-meta {
+}
+
+wishlist-product-card .wk-product-title {
+}
+
+wishlist-product-card .wk-vendor {
+}
+
+wishlist-product-card .wk-price {
+}
+
+wishlist-page .wk-page {
+  margin-bottom: 3em;
+  margin-top: 3em;
+}
+
+wishlist-page .wk-header .wk-title {
+  font-size: var(--heading-h1-font-size);
+  font-family: var(--heading-font-family);
+  font-weight: var(--heading-font-weight);
+  font-style: var(--heading-font-style);
+  color: rgb(var(--heading-color));
+  text-transform: var(--heading-text-transform);
+}
+
+wishlist-page .wk-grid {
+  --columns: 1;
+}
+
+@media (min-width: 400px) {
+  wishlist-page .wk-grid {
+    --columns: 2;
+  }
+}
+
+@media (min-width: 700px) {
+  wishlist-page .wk-grid {
+    --columns: 3;
+  }
+}
+
+@media (min-width: 900px) {
+  wishlist-page .wk-grid {
+    --columns: 4;
+  }
+}
+
+.header__icon-list {
+  gap: 10px;
+}
+
+@media screen and (min-width: 741px) {
+  .header__icon-list {
+    gap: 24px;
+  }
+}
+
+wishlist-buy-all {
+  display: none;
+}
+
+wishlist-page .wk-login-callout,
+wishlist-page .wk-wishlist-empty-callout {
+  padding: 0;
+}

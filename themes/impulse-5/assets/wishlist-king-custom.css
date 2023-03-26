@@ -1,7 +1,7 @@
 wishlist-link .wk-button {
   --icon-size: 20px;
   --icon-stroke: var(--colorNavText);
-  --icon-stroke-width: 1.5px;
+  --icon-stroke-width: 2px;
   --badge-size: 15px;
 
   display: inline-flex;
@@ -26,6 +26,8 @@ wishlist-link .wk-selected {
 wishlist-link .wk-pill {
   background: var(--colorCartDot);
   border: 2px solid var(--colorBody);
+  top: 3px;
+  right: 7px;
 }
 
 wishlist-button .wk-floating {

@@ -2,11 +2,11 @@ import {
   html,
   repeat,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@2.6.0/all/lit-all.min.js";
-import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.4/wishlist-element.js";
-import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.4/controllers.js";
-import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.4/components/icon.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.4/components/button.js";
-import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.4/components/option-select.js";
+import { WishlistElement } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.9/wishlist-element.js";
+import { ProductFormController } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.9/controllers.js";
+import { Icon } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.9/components/icon.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.9/components/button.js";
+import "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.9/components/option-select.js";
 
 export class WishlistPage extends WishlistElement {
   getStateConfig() {
@@ -356,6 +356,10 @@ export class WishlistProductCard extends WishlistElement {
             <wk-option-select
               id=${`${this.wishlistItem.id}-${option.name}`}
               .option=${option}
+              .defaultText=${this.getTranslation(
+                "wishlist_product.select_option",
+                option
+              )}
             ></wk-option-select>
           `
       )}

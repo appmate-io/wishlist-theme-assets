@@ -1,11 +1,10 @@
 wishlist-link .wk-button {
-  --icon-size: 21px;
+  --icon-size: 20px;
   --icon-stroke: rgb(var(--color-foreground));
-  --icon-stroke-width: 1.1px;
+  --icon-stroke-width: 1px;
 
   height: 4.4rem;
-  width: 3.4rem;
-  margin-right: -20px;
+  width: 4.4rem;
   color: rgb(var(--color-foreground));
 }
 
@@ -13,12 +12,10 @@ wishlist-link .wk-selected {
   --icon-fill: transparent;
 }
 
-wishlist-link .wk-button .wk-pill {
-  --size: 15px;
+wishlist-link .wk-pill {
+  --size: 17px;
 
-  top: 17px;
-  right: 23px;
-  font-size: 10px;
+  font-size: 0.9rem;
   color: rgb(var(--color-button-text));
   background-color: rgb(var(--color-button));
 }
@@ -30,25 +27,19 @@ wishlist-button .wk-floating .wk-button {
   color: rgba(var(--color-button), var(--alpha-button-background));
 }
 
-wishlist-button wk-button:not(.wk-floating) .wk-button {
-}
-
-wishlist-button .wk-floating .wk-button {
-}
-
 wishlist-button .wk-button {
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
   font-weight: 400;
   font-family: inherit;
 }
 
 wishlist-page .wk-page {
-  padding-top: 27px;
   padding-bottom: 27px;
 }
 
 @media screen and (min-width: 750px) {
   wishlist-page .wk-page {
-    padding-top: 36px;
     padding-bottom: 36px;
   }
 }
@@ -96,10 +87,4 @@ wishlist-page .wk-grid {
 
 wishlist-buy-all {
   display: none;
-}
-
-wishlist-save-for-later .wk-button {
-  --icon-stroke: rgba(var(--color-button), var(--alpha-button-background));
-
-  color: rgba(var(--color-button), var(--alpha-button-background));
 }

@@ -1,0 +1,158 @@
+import { WishlistApp } from "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.9/wishlist-app.js";
+
+export const createApp = ({ settings, config, locale }) => {
+  if (window.WishlistKing) {
+    return;
+  }
+
+  const app = new WishlistApp({
+    config,
+    settings,
+    locale,
+    dependencies: [
+      "https://cdn.jsdelivr.net/npm/@appmate/wishlist@4.20.9/components/wishlist.css",
+      "{{ 'wishlist-king-custom.css' | asset_url }}",
+      "{{ 'wishlist-king-components.js' | asset_url }}",
+    ],
+  });
+
+  initEvents(app);
+  initComponents(app);
+
+  return app;
+};
+
+const initComponents = ({ theme, routes }) => {
+  // Header link
+  theme.watch(
+    {
+      selector: ".header-controls__cart",
+    },
+    (target) => {
+      target.insertBefore(
+        theme.createComponent("wishlist-link", {
+          props: {
+            layout: "icon-only",
+            alignment: "center",
+            badgeLayout: "pill-and-text",
+            badgeParentheses: false,
+            badgeHiddenIfEmpty: false,
+          },
+        })
+      );
+    }
+  );
+
+  // Grid items
+  theme.watch(
+    {
+      selector: `.product-thumbnail__link[href*="/products/"]`,
+      pageType: ["home", "product", "collection"],
+    },
+    (target) => {
+      target.insertAfter(
+        theme.createComponent("wishlist-button", {
+          dataset: {
+            productHandle: theme.getProductHandle(target.element.href),
+            variantId: theme.getVariantId(target.element.href),
+          },
+          props: {
+            layout: "icon-only",
+            alignment: "center",
+            floating: {
+              reference: target,
+              position: {
+                placement: "top-end",
+                inset: true,
+              },
+              offset: 0,
+            },
+          },
+        })
+      );
+    }
+  );
+
+  // Product page
+  theme.watch(
+    {
+      selector: `.product-form__cart-buttons`,
+      pageType: ["product"],
+    },
+    (target) => {
+      target.insertAfter(
+        theme.createComponent("wishlist-button", {
+          dataset: {
+            productHandle: theme.getProductHandle(document.location.href),
+            variantId: theme.getVariantId(document.location.href),
+          },
+          props: {
+            layout: "icon-and-text",
+            alignment: "center",
+            fullWidth: true,
+            outline: false,
+          },
+        })
+      );
+    }
+  );
+
+  // Save for later
+  theme.watch(
+    {
+      selector: `.xxx-cart-item-details-xxx .xxx-cart-item-link-xxx[href*="/products/"]`,
+      pageType: ["cart"],
+    },
+    (target) => {
+      target.closest(".xxx-cart-item-details-xxx").append(
+        theme.createComponent("wishlist-save-for-later", {
+          dataset: {
+            productHandle: theme.getProductHandle(target.element.href),
+            variantId: theme.getVariantId(target.element.href),
+          },
+          props: {
+            layout: "icon-and-text",
+            alignment: "center",
+          },
+        })
+      );
+    }
+  );
+
+  // Wishlist page
+  theme.watch(
+    {
+      selector: "#wishlist-page",
+    },
+    (target) => {
+      target.replace(
+        theme.createComponent("wishlist-page", {
+          dataset: {
+            wishlistId: theme.getWishlistId(window.location.pathname),
+          },
+        })
+      );
+    }
+  );
+};
+
+const initEvents = (app) => {
+  app.events.subscribe("wk:wishlist:add-to-cart:success", (event) => {
+    window.location.href = app.routes.cartUrl;
+  });
+  app.events.subscribe("wk:wishlist:add-all-to-cart:success", (event) => {
+    window.location.href = app.routes.cartUrl;
+  });
+  app.events.subscribe("wk:cart:save-for-later:success", (event) => {
+    // event.data.trigger
+    //   .closest(".xxx-cart-item-xxx")
+    //   .querySelector("xxx-cart-remove-button-xxx")
+    //   .click();
+  });
+  app.events.subscribe("wk:wishlist:login-required", (event) => {
+    const ignoreActions = ["wishlist:private:load"];
+    if (!ignoreActions.includes(event.data.action)) {
+      window.location.href = app.routes.accountLoginUrl;
+    }
+  });
+};

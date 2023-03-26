@@ -1,0 +1,108 @@
+wishlist-link .wk-button {
+  --icon-size: 20px;
+  --icon-stroke: var(--colorNavText);
+  --icon-stroke-width: 1.5px;
+  --badge-size: 15px;
+
+  display: inline-flex;
+  padding: 7.5px 12px;
+  vertical-align: middle;
+}
+
+@media only screen and (max-width: 959px) {
+  wishlist-link .wk-button {
+    padding: 7.5px 2px;
+  }
+
+  wishlist-link .wk-pill {
+    left: 10px;
+  }
+}
+
+wishlist-link .wk-selected {
+  --icon-fill: transparent;
+}
+
+wishlist-link .wk-pill {
+  background: var(--colorCartDot);
+  border: 2px solid var(--colorBody);
+}
+
+.is-light wishlist-link .wk-button {
+  --icon-stroke: white;
+}
+
+wishlist-button .wk-floating {
+  z-index: 1;
+}
+
+wishlist-button .wk-button,
+wishlist-button .wk-floating .wk-button {
+  --icon-size: 18px;
+  --icon-stroke: black;
+}
+
+wishlist-button wk-button:not(.wk-floating) .wk-button {
+}
+
+wishlist-button .wk-floating .wk-button {
+}
+
+wishlist-page .wk-page {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+@media only screen and (min-width: 769px) {
+  wishlist-page .wk-page {
+    padding-top: 75px;
+    padding-bottom: 75px;
+  }
+}
+
+wishlist-product-card .wk-image {
+  aspect-ratio: 1 / 1;
+}
+
+wishlist-product-card .wk-submit-button {
+  font-size: max(calc(var(--typeBaseSize) - 4px), 13px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  border: 1px solid transparent;
+  background: var(--colorBtnPrimary);
+  color: var(--colorBtnPrimaryText);
+  border-radius: var(--buttonRadius);
+  transition: background 0.2s ease 0s;
+}
+
+wishlist-product-card .wk-submit-button:not(:disabled):hover {
+  background: var(--colorBtnPrimaryLight);
+  transition-delay: 0.25s;
+}
+
+wishlist-page .wk-grid {
+  --columns: 1;
+}
+
+@media (min-width: 400px) {
+  wishlist-page .wk-grid {
+    --columns: 2;
+  }
+}
+
+@media (min-width: 700px) {
+  wishlist-page .wk-grid {
+    --columns: 3;
+  }
+}
+
+@media (min-width: 900px) {
+  wishlist-page .wk-grid {
+    --columns: 4;
+  }
+}
+
+wishlist-buy-all {
+  display: none;
+}

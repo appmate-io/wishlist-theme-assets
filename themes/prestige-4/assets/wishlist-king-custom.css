@@ -4,6 +4,15 @@ wishlist-link .wk-button {
   --icon-stroke-width: 1px;
 
   padding: 8px 12px;
+  transition: all 0.2s ease-in-out;
+}
+
+.supports-sticky
+  .Search[aria-hidden="true"]
+  + .Header--transparent
+  wishlist-link
+  .wk-button {
+  --icon-stroke: currentcolor;
 }
 
 wishlist-link .wk-icon {

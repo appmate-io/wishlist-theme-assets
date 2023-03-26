@@ -7,7 +7,7 @@ theme.watch(
     selector: `.wk-wishlist-link`,
   },
   (target) => {
-    theme.createHeadlessComponent("wishlist-link", {
+    theme.createHeadlessComponent("wishlist-link-headless", {
       host: target,
     });
   }
@@ -52,7 +52,7 @@ export class WishlistLinkHeadless extends WishlistElementHeadless {
   }
 }
 
-headlessElements.define("wishlist-link", WishlistLinkHeadless);
+headlessElements.define("wishlist-link-headless", WishlistLinkHeadless);
 
 export class WishlistButtonHeadless extends WishlistElementHeadless {
   getStateConfig() {

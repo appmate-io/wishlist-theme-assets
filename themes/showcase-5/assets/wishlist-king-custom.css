@@ -1,0 +1,125 @@
+wishlist-link .wk-button {
+  --icon-size: 26px;
+  --icon-stroke: black;
+  --icon-stroke-width: 1.5px;
+
+  height: 44px;
+  width: 44px;
+  right: 55px;
+  top: -20px;
+  display: inline-flex !important;
+  position: absolute;
+}
+
+.site-control .site-control__inner .nav-search {
+  right: 95px;
+}
+
+@media (min-width: 1100px) {
+  wishlist-link .wk-button {
+    top: 0;
+    position: relative;
+  }
+}
+
+.site-control .site-control__inner .wk-icon svg {
+  width: var(--size);
+  height: var(--size);
+}
+
+@media (min-width: 1100px) and (min-width: 1441px) {
+  .site-control .site-control__inner .nav-search {
+    right: 20px;
+  }
+
+  wishlist-link .wk-button {
+    right: 25px;
+  }
+}
+
+wishlist-button .wk-floating {
+  z-index: 1;
+}
+
+wishlist-button .wk-button,
+wishlist-button .wk-floating .wk-button {
+  --icon-size: 18px;
+  --icon-stroke: black;
+}
+
+wishlist-button wk-button:not(.wk-floating) .wk-button {
+}
+
+wishlist-button .wk-floating .wk-button {
+}
+
+wishlist-save-for-later .wk-button {
+  --icon-size: 14px;
+  --icon-stroke: black;
+}
+
+wishlist-product-card .wk-image {
+  aspect-ratio: 1 / 1;
+}
+
+wishlist-product-card .wk-submit-button {
+  background-color: #111;
+  border: 1px solid #111;
+  text-transform: uppercase;
+  border-radius: 0px;
+  color: #ffffff;
+}
+
+wishlist-product-card .wk-meta {
+}
+
+wishlist-product-card .wk-product-title {
+}
+
+wishlist-product-card .wk-vendor {
+}
+
+wishlist-product-card .wk-price {
+}
+
+wishlist-page .wk-page {
+  padding: 3em 0;
+}
+
+wishlist-page .wk-header .wk-title {
+}
+
+wishlist-page .wk-grid {
+  --columns: 1;
+}
+
+@media (min-width: 400px) {
+  wishlist-page .wk-grid {
+    --columns: 2;
+  }
+}
+
+@media (min-width: 700px) {
+  wishlist-page .wk-grid {
+    --columns: 3;
+  }
+}
+
+@media (min-width: 900px) {
+  wishlist-page .wk-grid {
+    --columns: 4;
+  }
+}
+
+wishlist-buy-all {
+  display: none;
+}
+
+wishlist-page .wk-login-callout,
+wishlist-page .wk-wishlist-empty-callout {
+  padding: 0;
+}
+
+wishlist-page .wk-header .wk-controls {
+  margin-top: 1em;
+}
